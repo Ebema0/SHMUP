@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class YesNoMenu : Menu
 {
-    public static YesNoMenu instance;
+    public static YesNoMenu instance = null;
 
     void Start()
     {

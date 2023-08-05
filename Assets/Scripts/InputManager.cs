@@ -48,6 +48,7 @@ public class InputManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); 
 
         //Initialisation
+
         playerController[0] = 0;
         playerController[1] = 1;
 
@@ -131,8 +132,32 @@ public class InputManager : MonoBehaviour
     private void FixedUpdate()
     {
         UpdatePlayerState(0);
-        if (GameManager.instance!=null && GameManager.twoPlayer) ;
+        if (GameManager.instance!=null && GameManager.instance.twoPlayer) ;
         UpdatePlayerState(1);
+    }
+
+    public class InputState
+    {
+        public bool left, right, up, down;
+        public bool shoot, bomb, options, auto, beam, extra1, extra2, extra3;
+    }
+
+    public class ButtonMapping
+    {
+        public byte shoot = 0;
+        public byte bomb = 1;
+        public byte options = 2;
+        public byte auto = 3;
+        public byte beam = 4;
+        public byte extra1 = 5;
+        public byte extra2 = 6;
+        public byte extra3 = 7;
+    }
+
+    public class AxisMapping
+    {
+        public byte horizontal = 0;
+        public byte vertical = 1;
     }
 
     public int DetectControllerButtonPress()
@@ -178,28 +203,4 @@ public class InputManager : MonoBehaviour
         return false; 
      }
     
-}
-
-public class InputState
-{
-    public bool left, right, up, down;
-    public bool shoot, bomb, options, auto, beam, extra1, extra2, extra3;
-}
-
-public class ButtonMapping
-{
-    public byte shoot = 0;
-    public byte bomb = 1;
-    public byte options = 2;
-    public byte auto = 3;
-    public byte beam = 4;
-    public byte extra1 = 5;
-    public byte extra2 = 6;
-    public byte extra3 = 7;
-}
-
-public class AxisMapping
-{
-    public byte horizontal = 0;
-    public byte vertical = 1;
 }

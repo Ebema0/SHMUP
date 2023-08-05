@@ -1,34 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
     public static InputManager instance = null;
+
     public InputState[] playerState = new InputState[2];
-    public InputState[]  playerButtons = new ButtonMappin[2]:
-    public AxisMapping[] playeAxis = new AxisMapping[2];
+
+    public ButtonMapping[] playerButtons = new ButtonMapping[2];
+    public AxisMapping[] playerAxis = new AxisMapping[2];
 
     public int[] playerController = new int[2];
-    public bool[] playerUsinKeys = new bool[2];
+    public bool[] playerUsingKeys = new bool[2];
 
     public const float deadZone = 0.01f;
 
     private System.Array allKeyCodes = System.Enum.GetValues(typeof(KeyCode));
 
-    private string[,] playerButtonNames = { { "J1_B1","J1_B2","J1_B3","J1_B4","J1_B5","J1_B6","J1_B7","J1_B8"},
+    private string[,] playerButtonsNames = { { "J1_B1","J1_B2","J1_B3","J1_B4","J1_B5","J1_B6","J1_B7","J1_B8"},
                                             { "J2_B1","J2_B2","J2_B3","J2_B4","J2_B5","J2_B6","J2_B7","J2_B8"},
                                             { "J3_B1","J3_B2","J3_B3","J3_B4","J3_B5","J3_B6","J3_B7","J3_B8"},
                                             { "J4_B1","J4_B2","J4_B3","J4_B4","J4_B5","J4_B6","J4_B7","J4_B8"},
                                             { "J5_B1","J5_B2","J5_B3","J5_B4","J5_B5","J5_B6","J5_B7","J5_B8"},
                                             { "J6_B1","J6_B2","J6_B3","J6_B4","J6_B5","J6_B6","J6_B7","J6_B8"}};
 
-    private[,] playerAxisNames = { {"J1_Horizontal","J1_Vertical" },
+    private string[,] playerAxisNames = { {"J1_Horizontal","J1_Vertical" },
                                    {"J2_Horizontal","J2_Vertical" },
                                    {"J3_Horizontal","J3_Vertical" },
                                    {"J4_Horizontal","J4_Vertical" },
                                    {"J5_Horizontal","J5_Vertical" },
                                    {"J6_Horizontal","J6_Vertical" },};
+
+    public string[] oldJoystick = null;  
+
     private void Start()
     {
         if (instance)
@@ -37,6 +43,7 @@ public class InputManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         instance = this;
         DontDestroyOnLoad(gameObject); 
 
@@ -50,9 +57,58 @@ public class InputManager : MonoBehaviour
         playerAxis[0] = new AxisMapping();
         playerAxis[1] = new AxisMapping();
 
+        playerButtons[0] = new ButtonMapping();
+        playerButtons[1] = new ButtonMapping();
+
         playerState[0] = new InputState();
         playerState[1] = new InputState();
 
+        oldJoystick = Input.GetJoystickNames();
+
+        StartCoroutine(CheckControllers());
+    }
+
+    private bool PlayerIsUsingController(int i)
+    {
+        if (playerController[0] == i)
+                return true;
+        if (GameManager.instance.twoPlayer && playerController[1] == i)
+                return true;
+        return false;
+    }
+
+    IEnumerator CheckControllers()
+    {
+        while (true )
+        {
+            yield return new WaitForSecondsRealtime(1f);
+
+            string[] currentJoysticks = Input.GetJoystickNames();
+
+            for (int i = 0; 1<currentJoysticks.Length; i++)
+            {
+                if (i<oldJoystick.Length)
+                {
+                    if (currentJoysticks[i] != oldJoystick[i])
+                    {
+                        if (string.IsNullOrEmpty(currentJoysticks[i])) //disconnect
+                        {
+                            Debug.Log("Controller "+i+" has been disconnected.");
+                            if (PlayerIsUsingController(i))
+                            {
+                                // Turn on CotrollerMenu
+                                // GameManager.instace.PauseGameplay();
+                            }
+                        }
+                    }
+                }
+                else // connected
+                {
+                    Debug.Log("Controller "+i+" is connected using: "+currentJoysticks[i]);
+
+                }
+            }
+        }
     }
 
      void UpdatePlayerState(int playerIndex)
@@ -87,7 +143,7 @@ public class InputManager : MonoBehaviour
         {
             for (int b=0; b<8;b++)
             {
-                if (InputManager.GetButton(playerButtonNames[j, b])) return j;
+                if (Input.GetButton(playerButtonsNames[j, b])) return j;
             }
         }
         return result;
@@ -95,9 +151,9 @@ public class InputManager : MonoBehaviour
 
     public int DetectKeyPress()
     {
-        foreach(KeyCode key in allKeysCodes)
+        foreach(KeyCode key in allKeyCodes)
         {
-            if (InputManager.GetKey(key)) return ((int)key);
+            if (Input.GetKey(key)) return ((int)key);
         }
         return -1;
     }
@@ -109,14 +165,14 @@ public class InputManager : MonoBehaviour
         {
             playerController[playerIndex] = controller;
             playerUsingKeys[playerIndex] = false;
-            Debug.Log("Player"´+playerIndex+"is set controller " + controller);
+            Debug.Log("Player"+playerIndex+"is set controller " + controller);
             return true;
         }
         if(DetectKeyPress()>-1)
         {
             playerController[playerIndex] = -1;
             playerUsingKeys[playerIndex] = true;
-            Debug.Log("Player"´+playerIndex+"is set Keyboard " + controller);
+            Debug.Log("Player"+playerIndex+"is set Keyboard " + controller);
             return true;
         }
         return false; 
@@ -134,12 +190,12 @@ public class ButtonMapping
 {
     public byte shoot = 0;
     public byte bomb = 1;
-    public byte options = 3;
-    public byte auto = 4;
-    public byte beam = 5;
-    public byte extra1 = 6;
-    public byte extra2 = 7;
-    public byte extra3 = 8;
+    public byte options = 2;
+    public byte auto = 3;
+    public byte beam = 4;
+    public byte extra1 = 5;
+    public byte extra2 = 6;
+    public byte extra3 = 7;
 }
 
 public class AxisMapping

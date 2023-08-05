@@ -6,7 +6,7 @@ public class TitleScreenMenu : Menu
 {
     public static TitleScreenMenu instance = null;
 
-    private void Start ()
+    private void Start()
     {
         if (instance)
         {
@@ -17,10 +17,14 @@ public class TitleScreenMenu : Menu
         }
         instance = this;
     }
-    public void OnFireButton()
-    {
-        TurnOff(false);
-        MainMenu.instance.TurnOn(this);
-    }
 
+    private void Update()
+    {
+        if (InputManager.instance.CheckForPlayerInput(0))
+        {
+            TurnOff(false);
+            MainMenu.instance.TurnOn(this);
+        }
+    }
 }
+   

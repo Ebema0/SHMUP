@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControllerMenu : Menu
 {
     public static ControllerMenu instance = null;
 
+    public int whichPlayer = 0;
+
+    public Text playerText = null; 
 
     void Start()
     {
@@ -19,8 +23,16 @@ public class ControllerMenu : Menu
         DontDestroyOnLoad(gameObject);
     }
 
-  public void OnFireButton()
+  
+    private void Update ()
     {
-        TurnOff(false);
+        if (ROOT.gameObject.activeInHierarchy)
+        {
+            if (InputManager.instance.CheckForPlayerInput(whichPlayer))
+            {
+                TurnOff(false);
+
+            }
+        }
     }
 }

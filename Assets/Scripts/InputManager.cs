@@ -12,6 +12,10 @@ public class InputManager : MonoBehaviour
     public ButtonMapping[] playerButtons = new ButtonMapping[2];
     public AxisMapping[] playerAxis = new AxisMapping[2];
 
+    public KeyButtonMapping[] playerKeyButtons = new KeyButtonMapping[2];
+    public KeyAxisMapping[] playerKeyAxis = new KeyAxisMapping[2];
+
+
     public int[] playerController = new int[2];
     public bool[] playerUsingKeys = new bool[2];
 
@@ -33,7 +37,7 @@ public class InputManager : MonoBehaviour
                                    {"J5_Horizontal","J5_Vertical" },
                                    {"J6_Horizontal","J6_Vertical" },};
 
-    public string[] oldJoystick = null;  
+    public string[] oldJoystick = null;
 
     private void Start()
     {
@@ -45,7 +49,7 @@ public class InputManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject); 
+        DontDestroyOnLoad(gameObject);
 
         //Initialisation
 
@@ -61,6 +65,12 @@ public class InputManager : MonoBehaviour
         playerButtons[0] = new ButtonMapping();
         playerButtons[1] = new ButtonMapping();
 
+        playerKeyButtons[0] = new KeyButtonMapping();
+        playerKeyButtons[1] = new KeyButtonMapping();
+
+        playerKeyAxis[0] = new KeyAxisMapping();
+        playerKeyAxis[1] = new KeyAxisMapping();
+
         playerState[0] = new InputState();
         playerState[1] = new InputState();
 
@@ -72,21 +82,21 @@ public class InputManager : MonoBehaviour
     private bool PlayerIsUsingController(int i)
     {
         if (playerController[0] == i)
-                return true;
+            return true;
         if (GameManager.instance.twoPlayer && playerController[1] == i)
-                return true;
+            return true;
         return false;
     }
 
     IEnumerator CheckControllers()
     {
-        while (true )
+        while (true)
         {
             yield return new WaitForSecondsRealtime(1f);
 
             string[] currentJoysticks = Input.GetJoystickNames();
 
-            for (int i = 0; 1<currentJoysticks.Length; i++)
+            for (int i = 0; i<currentJoysticks.Length; i++)
             {
                 if (i<oldJoystick.Length)
                 {
@@ -97,6 +107,9 @@ public class InputManager : MonoBehaviour
                             Debug.Log("Controller "+i+" has been disconnected.");
                             if (PlayerIsUsingController(i))
                             {
+                                ControllerMenu.instance.whichPlayer = i;
+                                ControllerMenu.instance.playerText.text = " Player "+ (i+1) +" controller is disconnected";
+                                ControllerMenu.instance.TurnOn(null);
                                 // Turn on CotrollerMenu
                                 // GameManager.instace.PauseGameplay();
                             }
@@ -110,23 +123,55 @@ public class InputManager : MonoBehaviour
                 }
             }
         }
+        
     }
 
-     void UpdatePlayerState(int playerIndex)
+    void UpdatePlayerState(int playerIndex)
     {
-        if (Input.GetAxisRaw(playerAxisNames[playerController[playerIndex],playerAxisNames[playerIndex].horizontal])<deadZone) playerState[playerIndex].left = true; else playerState[playerIndex].left = false;
-        if (Input.GetAxisRaw(playerAxisNames[playerController[playerIndex],playerAxisNames[playerIndex].horizontal])>deadZone) playerState[playerIndex].right = true; else playerState[playerIndex].right = false;
-        if (Input.GetAxisRaw(playerAxisNames[playerController[playerIndex],playerAxisNames[playerIndex].vertical])<deadZone) playerState[playerIndex].down = true; else playerState[playerIndex].down = false;
-        if (Input.GetAxisRaw(playerAxisNames[playerController[playerIndex], playerAxisNames[playerIndex].vertical])>deadZone) playerState[playerIndex].up = true; else playerState[playerIndex].up = false;
+        playerState[playerIndex].left = false;
+        playerState[playerIndex].right = false;
+        playerState[playerIndex].down = false;
+        playerState[playerIndex].up = false;
 
-        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].shoot])) playerState[playerIndex].shoot = true; else playerState[playerIndex].shoot = false;
-        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].bomb])) playerState[playerIndex].bomb = true; else playerState[playerIndex].bomb = false;
-        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].options])) playerState[playerIndex].options = true; else playerState[playerIndex].options = false;
-        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].auto])) playerState[playerIndex].auto = true; else playerState[playerIndex].auto = false;
-        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].beam])) playerState[playerIndex].beam = true; else playerState[playerIndex].beam = false;
-        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra1])) playerState[playerIndex].extra1 = true; else playerState[playerIndex].extra1 = false;
-        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra2])) playerState[playerIndex].extra2 = true; else playerState[playerIndex].extra2 = false;
-        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra3])) playerState[playerIndex].extra3 = true; else playerState[playerIndex].extra3 = false;
+        playerState[playerIndex].shoot = false;
+        playerState[playerIndex].bomb = false;
+        playerState[playerIndex].options = false;
+        playerState[playerIndex].auto = false;
+        playerState[playerIndex].beam = false;
+        playerState[playerIndex].extra1 = false;
+        playerState[playerIndex].extra2 = false;
+        playerState[playerIndex].extra3 = false;
+
+        if (Input.GetKey(playerKeyAxis[playerIndex].left)) playerState[playerIndex].left = true;
+        if (Input.GetKey(playerKeyAxis[playerIndex].right)) playerState[playerIndex].right = true;
+        if (Input.GetKey(playerKeyAxis[playerIndex].up)) playerState[playerIndex].up = true;
+        if (Input.GetKey(playerKeyAxis[playerIndex].down)) playerState[playerIndex].down = true;
+
+        if (Input.GetKey(playerKeyButtons[playerIndex].shoot)) playerState[playerIndex].shoot = true;
+        if (Input.GetKey(playerKeyButtons[playerIndex].bomb)) playerState[playerIndex].bomb = true;
+        if (Input.GetKey(playerKeyButtons[playerIndex].options)) playerState[playerIndex].options = true;
+        if (Input.GetKey(playerKeyButtons[playerIndex].beam)) playerState[playerIndex].beam = true;
+        if (Input.GetKey(playerKeyButtons[playerIndex].extra1)) playerState[playerIndex].extra1 = true;
+        if (Input.GetKey(playerKeyButtons[playerIndex].extra2)) playerState[playerIndex].extra2 = true;
+        if (Input.GetKey(playerKeyButtons[playerIndex].extra3)) playerState[playerIndex].extra3 = true;
+        
+
+        if (playerController[playerIndex]<0) return;
+
+        if (Input.GetAxisRaw(playerAxisNames[playerController[playerIndex], playerAxis[playerIndex].horizontal])<deadZone) playerState[playerIndex].left = true; 
+        if (Input.GetAxisRaw(playerAxisNames[playerController[playerIndex], playerAxis[playerIndex].horizontal])>deadZone) playerState[playerIndex].right = true;
+        if (Input.GetAxisRaw(playerAxisNames[playerController[playerIndex], playerAxis[playerIndex].vertical])<deadZone)   playerState[playerIndex].down = true; 
+        if (Input.GetAxisRaw(playerAxisNames[playerController[playerIndex], playerAxis[playerIndex].vertical])>deadZone)   playerState[playerIndex].up = true;   
+
+
+        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].shoot])) playerState[playerIndex].shoot = true;    
+        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].bomb])) playerState[playerIndex].bomb = true;      
+        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].options])) playerState[playerIndex].options = true;
+        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].auto])) playerState[playerIndex].auto = true;      
+        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].beam])) playerState[playerIndex].beam = true;      
+        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra1])) playerState[playerIndex].extra1 = true;  
+        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra2])) playerState[playerIndex].extra2 = true;  
+        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra3])) playerState[playerIndex].extra3 = true;  
     }
 
     private void FixedUpdate()
@@ -136,6 +181,50 @@ public class InputManager : MonoBehaviour
         UpdatePlayerState(1);
     }
 
+    public int DetectControllerButtonPress()
+    {
+        int result = -1;
+
+        for (int j = 0; j<6; j++)
+        {
+            for (int b = 0; b<8; b++)
+            {
+                if (Input.GetButton(playerButtonsNames[j, b])) return j;
+            }
+        }
+        return result;
+    }
+
+    public int DetectKeyPress()
+    {
+        foreach (KeyCode key in allKeyCodes)
+        {
+            if (Input.GetKey(key)) return ((int)key);
+        }
+        return -1;
+    }
+
+    public bool CheckForPlayerInput(int playerIndex)
+    {
+        int controller = DetectControllerButtonPress();
+        if (controller>-1)
+        {
+            playerController[playerIndex] = controller;
+            playerUsingKeys[playerIndex] = false;
+            Debug.Log("Player"+playerIndex+"is set controller " + controller);
+            return true;
+        }
+        if (DetectKeyPress()>-1)
+        {
+            playerController[playerIndex] = -1;
+            playerUsingKeys[playerIndex] = true;
+            Debug.Log("Player"+playerIndex+"is set Keyboard " + controller);
+            return true;
+        }
+        return false;
+    }
+
+}
     public class InputState
     {
         public bool left, right, up, down;
@@ -160,47 +249,26 @@ public class InputManager : MonoBehaviour
         public byte vertical = 1;
     }
 
-    public int DetectControllerButtonPress()
-    {
-        int result = -1;
-        
-        for(int j=0;j<6;j++)
-        {
-            for (int b=0; b<8;b++)
-            {
-                if (Input.GetButton(playerButtonsNames[j, b])) return j;
-            }
-        }
-        return result;
-    }
+   public class KeyButtonMapping
+   {
+    public KeyCode shoot   = KeyCode.B;
+    public KeyCode bomb    = KeyCode.N;
+    public KeyCode options = KeyCode.M;
+    public KeyCode auto = KeyCode.Comma;
+    public KeyCode beam    = KeyCode.Period;
+    public KeyCode extra1  = KeyCode.J;
+    public KeyCode extra2  = KeyCode.K;
+    public KeyCode extra3  = KeyCode.L;
+   }
 
-    public int DetectKeyPress()
-    {
-        foreach(KeyCode key in allKeyCodes)
-        {
-            if (Input.GetKey(key)) return ((int)key);
-        }
-        return -1;
-    }
+    public class KeyAxisMapping
+   {
+    public KeyCode left = KeyCode.LeftArrow;
+    public KeyCode right = KeyCode.RightArrow;
+    public KeyCode up = KeyCode.UpArrow;
+    public KeyCode down = KeyCode.DownArrow;
 
-    public bool CheckForPlayerInput(int playerIndex)
-    {
-        int controller = DetectControllerButtonPress();
-        if (controller>-1)
-        {
-            playerController[playerIndex] = controller;
-            playerUsingKeys[playerIndex] = false;
-            Debug.Log("Player"+playerIndex+"is set controller " + controller);
-            return true;
-        }
-        if(DetectKeyPress()>-1)
-        {
-            playerController[playerIndex] = -1;
-            playerUsingKeys[playerIndex] = true;
-            Debug.Log("Player"+playerIndex+"is set Keyboard " + controller);
-            return true;
-        }
-        return false; 
-     }
-    
 }
+
+
+

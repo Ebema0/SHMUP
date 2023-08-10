@@ -39,6 +39,9 @@ public class InputManager : MonoBehaviour
 
     public string[] oldJoystick = null;
 
+    public static string[] actionNames = { "Shoot", "Bomb", "Auto", "Beam", "Menu", "Extra2", "Extra3", "Options" };
+    public static string[] axisNames = { "Left", "Right", "Up", "Down"};
+
     private void Start()
     {
         if (instance)
@@ -138,7 +141,7 @@ public class InputManager : MonoBehaviour
         playerState[playerIndex].options = false;
         playerState[playerIndex].auto = false;
         playerState[playerIndex].beam = false;
-        playerState[playerIndex].extra1 = false;
+        playerState[playerIndex].menu = false;
         playerState[playerIndex].extra2 = false;
         playerState[playerIndex].extra3 = false;
 
@@ -151,7 +154,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(playerKeyButtons[playerIndex].bomb)) playerState[playerIndex].bomb = true;
         if (Input.GetKey(playerKeyButtons[playerIndex].options)) playerState[playerIndex].options = true;
         if (Input.GetKey(playerKeyButtons[playerIndex].beam)) playerState[playerIndex].beam = true;
-        if (Input.GetKey(playerKeyButtons[playerIndex].extra1)) playerState[playerIndex].extra1 = true;
+        if (Input.GetKey(playerKeyButtons[playerIndex].menu)) playerState[playerIndex].menu = true;
         if (Input.GetKey(playerKeyButtons[playerIndex].extra2)) playerState[playerIndex].extra2 = true;
         if (Input.GetKey(playerKeyButtons[playerIndex].extra3)) playerState[playerIndex].extra3 = true;
         
@@ -169,7 +172,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].options])) playerState[playerIndex].options = true;
         if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].auto])) playerState[playerIndex].auto = true;      
         if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].beam])) playerState[playerIndex].beam = true;      
-        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra1])) playerState[playerIndex].extra1 = true;  
+        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].menu])) playerState[playerIndex].menu = true;  
         if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra2])) playerState[playerIndex].extra2 = true;  
         if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra3])) playerState[playerIndex].extra3 = true;  
     }
@@ -224,23 +227,112 @@ public class InputManager : MonoBehaviour
         return false;
     }
 
+    public string GetButtonName(int playerIndex, int actionID)
+    {
+        string buttonName = "";
+        switch(actionID)
+        {
+            case 0:
+                buttonName = playerButtonsNames[playerIndex, playerButtons[playerIndex].shoot];
+                break;                   
+            case 1:                      
+                buttonName = playerButtonsNames[playerIndex, playerButtons[playerIndex].bomb];
+                break;                   
+            case 2:                      
+                buttonName = playerButtonsNames[playerIndex, playerButtons[playerIndex].options];
+                break;                   
+            case 3:                      
+                buttonName = playerButtonsNames[playerIndex, playerButtons[playerIndex].auto];
+                break;                   
+            case 4:                      
+                buttonName = playerButtonsNames[playerIndex, playerButtons[playerIndex].beam];
+                break;                   
+            case 5:                      
+                buttonName = playerButtonsNames[playerIndex, playerButtons[playerIndex].menu];
+                break;                   
+            case 6:                      
+                buttonName = playerButtonsNames[playerIndex, playerButtons[playerIndex].extra2];
+                break;                   
+            case 7:                      
+                buttonName = playerButtonsNames[playerIndex, playerButtons[playerIndex].extra3];
+                break;
+        }
+        char b = buttonName[4];
+        return "Button" + b.ToString();
+    }
+    public string GetKeyName(int playerIndex,int actionID)
+    {
+        KeyCode key = KeyCode.None;
+        switch(actionID)
+        {
+            case 0:
+                key = playerKeyButtons[playerIndex].shoot;
+                break;
+            case 1:
+                key = playerKeyButtons[playerIndex].bomb;
+                break;
+            case 2:
+                key = playerKeyButtons[playerIndex].options;
+                break;
+            case 3:
+                key = playerKeyButtons[playerIndex].auto;
+                break;
+            case 4:
+                key = playerKeyButtons[playerIndex].beam;
+                break;
+            case 5:
+                key = playerKeyButtons[playerIndex].menu;
+                break;
+            case 6:
+                key = playerKeyButtons[playerIndex].extra2;
+                break;
+            case 7:
+                key = playerKeyButtons[playerIndex].extra3;
+                break;
+        }
+        return key.ToString();
+
+    }
+
+    public string GetKeyAxisName(int playerIndex,int actionID)
+    {
+        KeyCode key = KeyCode.None;
+        switch(actionID)
+        {
+            case 0:
+                key = playerKeyAxis[playerIndex].left;
+                break;
+            case 1:
+                key = playerKeyAxis[playerIndex].right;
+                break;
+            case 2:
+                key = playerKeyAxis[playerIndex].up;
+                break;
+            case 3:
+                key = playerKeyAxis[playerIndex].down;
+                break;
+        }
+        return key.ToString();
+
+    }
+
 }
     public class InputState
     {
         public bool left, right, up, down;
-        public bool shoot, bomb, options, auto, beam, extra1, extra2, extra3;
+        public bool shoot, bomb, options, auto, beam, menu, extra2, extra3;
     }
 
     public class ButtonMapping
     {
-        public byte shoot = 0;
-        public byte bomb = 1;
+        public byte shoot   = 0;
+        public byte bomb    = 1;
         public byte options = 2;
-        public byte auto = 3;
-        public byte beam = 4;
-        public byte extra1 = 5;
-        public byte extra2 = 6;
-        public byte extra3 = 7;
+        public byte auto    = 3;
+        public byte beam    = 4;
+        public byte menu    = 5;
+        public byte extra2  = 6;
+        public byte extra3  = 7;
     }
 
     public class AxisMapping
@@ -254,9 +346,9 @@ public class InputManager : MonoBehaviour
     public KeyCode shoot   = KeyCode.B;
     public KeyCode bomb    = KeyCode.N;
     public KeyCode options = KeyCode.M;
-    public KeyCode auto = KeyCode.Comma;
+    public KeyCode auto    = KeyCode.Comma;
     public KeyCode beam    = KeyCode.Period;
-    public KeyCode extra1  = KeyCode.J;
+    public KeyCode menu    = KeyCode.J;
     public KeyCode extra2  = KeyCode.K;
     public KeyCode extra3  = KeyCode.L;
    }
@@ -268,7 +360,7 @@ public class InputManager : MonoBehaviour
     public KeyCode up = KeyCode.UpArrow;
     public KeyCode down = KeyCode.DownArrow;
 
-}
+   }
 
 
 

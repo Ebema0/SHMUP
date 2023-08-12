@@ -184,7 +184,7 @@ public class InputManager : MonoBehaviour
         UpdatePlayerState(1);
     }
 
-    public int DetectControllerButtonPress()
+    public int DetectControllerButtonPress() // return controller index
     {
         int result = -1;
 
@@ -315,7 +315,88 @@ public class InputManager : MonoBehaviour
         return key.ToString();
 
     }
+    public void BindPlayerKey(int player, int actionID,KeyCode key)
+    {
+        switch (actionID)
+        {
+            case 0:
+                playerKeyButtons[player].shoot = key; 
+            break;
+            case 1:
+                playerKeyButtons[player].bomb = key;
+            break;
+            case 2:
+                playerKeyButtons[player].options = key;
+            break;
+            case 3:
+                playerKeyButtons[player].auto = key;
+            break;
+            case 4:
+                playerKeyButtons[player].beam = key;
+            break;
+            case 5:
+                playerKeyButtons[player].menu = key;
+            break;
+            case 6:
+                playerKeyButtons[player].extra2 = key;
+            break;
+            case 7:
+                playerKeyButtons[player].extra3 = key;
+            break;
 
+        }
+    }
+
+    public void BindPlayerAxisKey(int player, int actionID, KeyCode key)
+    {
+        switch (actionID)
+        {
+            case 0:
+                playerKeyAxis[player].left = key;
+                break;
+            case 1:
+                playerKeyAxis[player].right = key;
+                break;
+            case 2:
+                playerKeyAxis[player].up = key;
+                break;
+            case 3:
+                playerKeyAxis[player].down = key;
+                break;
+        }
+    }
+
+    public void BindPlayerbutton(int player, int actionID, byte button)
+    {
+        switch (actionID)
+        {
+            case 0:
+                playerButtons[player].shoot =   button;
+                break;                          
+            case 1:                             
+                playerButtons[player].bomb =    button;
+                break;                          
+            case 2:                             
+                playerButtons[player].options = button;
+                break;                          
+            case 3:                             
+                playerButtons[player].auto =    button;
+                break;                          
+            case 4:                             
+                playerButtons[player].beam =    button;
+                break;                          
+            case 5:                             
+                playerButtons[player].menu =    button;
+                break;                          
+            case 6:                             
+                playerButtons[player].extra2 =  button;
+                break;                          
+            case 7:                             
+                playerButtons[player].extra3 =  button;
+                break;
+
+        }
+    }
 }
     public class InputState
     {

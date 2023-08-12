@@ -523,7 +523,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 42509396}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Key
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &42509396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,7 +735,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 64640160}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &64640160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1353,7 +1377,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 145586486}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1AxisKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &145586486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1773,7 +1809,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 234048760}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2AxisKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &234048760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1887,9 +1935,9 @@ MonoBehaviour:
   - {fileID: 234048759}
   - {fileID: 630312908}
   - {fileID: 1940879222}
-  bindingPanel: {fileID: 0}
-  bindText: {fileID: 0}
-  eventSystem: {fileID: 0}
+  bindingPanel: {fileID: 1115139104}
+  bindText: {fileID: 1227995007}
+  eventSystem: {fileID: 2040976607}
 --- !u!4 &237625257
 Transform:
   m_ObjectHideFlags: 0
@@ -1982,6 +2030,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 246076368}
+  m_CullTransparentMesh: 1
+--- !u!1 &252920946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 252920947}
+  - component: {fileID: 252920949}
+  - component: {fileID: 252920948}
+  m_Layer: 5
+  m_Name: EscapeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &252920947
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252920946}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1115139105}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 10, y: -123.333336}
+  m_SizeDelta: {x: 493.6666, y: 64.6667}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &252920948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252920946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 31
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 49
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Press Escape to cancel
+--- !u!222 &252920949
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252920946}
   m_CullTransparentMesh: 1
 --- !u!1 &264217065
 GameObject:
@@ -2144,7 +2271,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 264295375}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &264295375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2265,7 +2404,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 315654219}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &315654219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2633,7 +2784,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 374907862}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1AxisKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &374907862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2833,7 +2996,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 391326179}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &391326179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3036,7 +3211,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 420897929}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &420897929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3157,7 +3344,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 480835123}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &480835123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3543,7 +3742,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 615543958}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &615543958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3664,7 +3875,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 630312909}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2AxisKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &630312909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3864,7 +4087,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 688061840}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Key
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &688061840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3985,7 +4220,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 696204215}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Key
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &696204215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4106,7 +4353,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 706690274}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2AxisKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &706690274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4464,7 +4723,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 780345148}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Key
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &780345148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4743,7 +5014,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 860000159}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &860000159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4945,7 +5228,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 897850439}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &897850439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5232,7 +5527,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 920967440}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &920967440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5391,6 +5698,7 @@ RectTransform:
   - {fileID: 177587022}
   - {fileID: 167129022}
   - {fileID: 1122745376}
+  - {fileID: 1115139105}
   m_Father: {fileID: 119565840}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5500,7 +5808,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 947619961}
 --- !u!114 &947619961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5704,7 +6012,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 990829140}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &990829140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5825,7 +6145,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1034380934}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1034380934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6266,7 +6598,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1095497963}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Key
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1095497963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6304,6 +6648,83 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1095497960}
+  m_CullTransparentMesh: 1
+--- !u!1 &1115139104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1115139105}
+  - component: {fileID: 1115139107}
+  - component: {fileID: 1115139106}
+  m_Layer: 5
+  m_Name: Binding Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1115139105
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115139104}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1227995006}
+  - {fileID: 252920947}
+  m_Father: {fileID: 947619956}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 48.349854, y: -23}
+  m_SizeDelta: {x: -560.1971, y: -1088.7687}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1115139106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115139104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1115139107
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115139104}
   m_CullTransparentMesh: 1
 --- !u!1 &1122745375
 GameObject:
@@ -6495,7 +6916,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.10828286, g: 0.6886792, b: 0.17754179, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -6515,7 +6936,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1125690031}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1125690031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6636,7 +7069,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1191989765}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1191989765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6674,6 +7119,87 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191989762}
+  m_CullTransparentMesh: 1
+--- !u!1 &1227995005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1227995006}
+  - component: {fileID: 1227995008}
+  - component: {fileID: 1227995007}
+  m_Layer: 5
+  m_Name: BindText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1227995006
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227995005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1115139105}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 21, y: 11}
+  m_SizeDelta: {x: 1188.0693, y: 159.3891}
+  m_Pivot: {x: 0.50000006, y: 0.50000006}
+--- !u!114 &1227995007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227995005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 78
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 78
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Press a key for player 1 shoot
+
+'
+--- !u!222 &1227995008
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227995005}
   m_CullTransparentMesh: 1
 --- !u!1 &1247883405
 GameObject:
@@ -6836,7 +7362,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1264443266}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1264443266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6957,7 +7495,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1310190581}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Key
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1310190581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7315,7 +7865,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1461711175}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Key
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1461711175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7596,7 +8158,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1515498944}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1515498944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7875,7 +8449,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1533388468}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1AxisKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1533388468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8316,7 +8902,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1659379916}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1659379916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8753,7 +9351,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1718362747}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1718362747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8874,7 +9484,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1730526163}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1AxisKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1730526163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9088,7 +9710,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1769011955}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1769011955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9525,7 +10159,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1867588867}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1867588867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9646,7 +10292,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1900421870}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP1Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1900421870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9848,7 +10506,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1915130132}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1915130132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9969,7 +10639,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1940879223}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2AxisKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1940879223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10090,7 +10772,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1954251401}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1954251401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10211,7 +10905,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1976202091}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1976202091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10704,7 +11410,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2030630914}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237625256}
+        m_TargetAssemblyTypeName: ControlsOptionMenu, Assembly-CSharp
+        m_MethodName: BindP2Button
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2030630914
 MonoBehaviour:
   m_ObjectHideFlags: 0

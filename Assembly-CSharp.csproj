@@ -47,25 +47,25 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\YesNoMenu.cs" />
-     <Compile Include="Assets\ControlsOptionMenu.cs" />
+     <Compile Include="Assets\Scripts\Menus\YesNoMenu.cs" />
+     <Compile Include="Assets\Scripts\Menus\ControlsOptionMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\TitleScreenMenu.cs" />
-     <Compile Include="Assets\PracticeMenu.cs" />
-     <Compile Include="Assets\MedalsMenu.cs" />
+     <Compile Include="Assets\Scripts\Menus\PracticeMenu.cs" />
+     <Compile Include="Assets\Scripts\Menus\MedalsMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\AudioOptionsMenu.cs" />
-     <Compile Include="Assets\OptionsMenu.cs" />
+     <Compile Include="Assets\Scripts\Menus\OptionsMenu.cs" />
      <Compile Include="Assets\Scripts\InputManager.cs" />
      <Compile Include="Assets\Scripts\SplashScreen.cs" />
      <Compile Include="Assets\Scripts\Menus\Menu.cs" />
-     <Compile Include="Assets\GraphicsOptionMenu.cs" />
-     <Compile Include="Assets\CreditsMenu.cs" />
+     <Compile Include="Assets\Scripts\Menus\GraphicsOptionMenu.cs" />
+     <Compile Include="Assets\Scripts\Menus\CreditsMenu.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
-     <Compile Include="Assets\ScoreMenu.cs" />
+     <Compile Include="Assets\Scripts\Menus\ScoreMenu.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Menus\PlayMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\MenuManager.cs" />
      <Compile Include="Assets\Scripts\GameInitialiser.cs" />
-     <Compile Include="Assets\ControllerMenu.cs" />
+     <Compile Include="Assets\Scripts\ControllerMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\CraftSelectMenu.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

@@ -431,7 +431,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 237625257}
-  - component: {fileID: 237625256}
   - component: {fileID: 237625258}
   m_Layer: 0
   m_Name: PracticeMenu
@@ -440,20 +439,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &237625256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237625255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 290bda6117c6935489045e4c21824edc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ROOT: {fileID: 119565839}
-  previousMenu: {fileID: 0}
 --- !u!4 &237625257
 Transform:
   m_ObjectHideFlags: 0

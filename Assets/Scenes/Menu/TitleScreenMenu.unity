@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ROOT: {fileID: 119565839}
+  previousMenu: {fileID: 0}
 --- !u!4 &237625257
 Transform:
   m_ObjectHideFlags: 0
@@ -249,9 +250,9 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 0
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 7dd870acb213fcc41b118d02f0161f89, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1

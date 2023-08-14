@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public bool twoPlayer = false;
 
+    public GameObject[] craftPrefab;
+
 
     void Start()
     {

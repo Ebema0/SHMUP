@@ -56,8 +56,8 @@ public class InputManager : MonoBehaviour
 
         //Initialisation
 
-        playerController[0] = 0;
-        playerController[1] = 1;
+        playerController[0] = -1;
+        playerController[1] = -1;
 
         playerUsingKeys[0] = false;
         playerUsingKeys[1] = false;
@@ -157,10 +157,13 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(playerKeyButtons[playerIndex].menu)) playerState[playerIndex].menu = true;
         if (Input.GetKey(playerKeyButtons[playerIndex].extra2)) playerState[playerIndex].extra2 = true;
         if (Input.GetKey(playerKeyButtons[playerIndex].extra3)) playerState[playerIndex].extra3 = true;
-        
 
-        if (playerController[playerIndex]<0) return;
 
+        if (playerController[playerIndex]<0)
+        {
+            UpdateMovement(playerIndex);
+            return;
+        }  
         if (Input.GetAxisRaw(playerAxisNames[playerController[playerIndex], playerAxis[playerIndex].horizontal])<deadZone) playerState[playerIndex].left = true; 
         if (Input.GetAxisRaw(playerAxisNames[playerController[playerIndex], playerAxis[playerIndex].horizontal])>deadZone) playerState[playerIndex].right = true;
         if (Input.GetAxisRaw(playerAxisNames[playerController[playerIndex], playerAxis[playerIndex].vertical])<deadZone)   playerState[playerIndex].down = true; 
@@ -174,7 +177,11 @@ public class InputManager : MonoBehaviour
         if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].beam])) playerState[playerIndex].beam = true;      
         if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].menu])) playerState[playerIndex].menu = true;  
         if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra2])) playerState[playerIndex].extra2 = true;  
-        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra3])) playerState[playerIndex].extra3 = true;  
+        if (Input.GetButton(playerButtonsNames[playerController[playerIndex], playerButtons[playerIndex].extra3])) playerState[playerIndex].extra3 = true;
+
+        UpdateMovement(playerIndex);
+
+
     }
 
     private void FixedUpdate()
@@ -397,9 +404,39 @@ public class InputManager : MonoBehaviour
 
         }
     }
+
+    void UpdateMovement(int playerIndex)
+    {
+        if (playerState[playerIndex].right)
+        {
+            playerState[playerIndex].movement.x = 1;
+
+        }
+        else if (playerState[playerIndex].left)
+        {
+            playerState[playerIndex].movement.x = -1;
+        }
+        else
+            playerState[playerIndex].movement.x = 0;
+
+        if (playerState[playerIndex].up)
+        {
+            playerState[playerIndex].movement.x = 1;
+
+        }
+        else if (playerState[playerIndex].down)
+        {
+            playerState[playerIndex].movement.y = -1;
+        }
+        else
+            playerState[playerIndex].movement.y = 0;
+        playerState[playerIndex].movement.Normalize();
+
+    }
 }
     public class InputState
     {
+        public Vector2 movement;
         public bool left, right, up, down;
         public bool shoot, bomb, options, auto, beam, menu, extra2, extra3;
     }

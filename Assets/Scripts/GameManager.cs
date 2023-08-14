@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] craftPrefab;
 
+    
+
+
+    Craft playerOneCraft = null;
 
     void Start()
     {
@@ -26,5 +30,19 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager Created");
     }
 
+    public void SpawnPlayer(int playerIndex, int craftType)
+    {
+        Debug.Assert(craftType<craftPrefab.Length);
+        Debug.Log("Spawning player "+playerIndex);
+        playerOneCraft = Instantiate(craftPrefab[craftType]).GetComponent<Craft>();
+        playerOneCraft.playerIndex = playerIndex;
+    }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (!playerOneCraft) SpawnPlayer(1, 0);
+        }
+    }
 }

@@ -47,11 +47,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Menus\YesNoMenu.cs" />
-     <Compile Include="Assets\Scripts\Menus\ControlsOptionMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\TitleScreenMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\PracticeMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\MedalsMenu.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Craft.cs" />
      <Compile Include="Assets\Scripts\Menus\AudioOptionsMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\OptionsMenu.cs" />
      <Compile Include="Assets\Scripts\InputManager.cs" />
@@ -63,12 +62,18 @@
      <Compile Include="Assets\Scripts\Menus\ScoreMenu.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Menus\PlayMenu.cs" />
+     <Compile Include="Assets\Scripts\EffectSystem.cs" />
+     <Compile Include="Assets\Scripts\ScriptableObject\CraftConfiguration.cs" />
+     <Compile Include="Assets\SelfDestruct.cs" />
      <Compile Include="Assets\Scripts\Menus\MenuManager.cs" />
      <Compile Include="Assets\Scripts\GameInitialiser.cs" />
      <Compile Include="Assets\Scripts\ControllerMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\CraftSelectMenu.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Craft.cs" />
-     <Compile Include="Assets\Scripts\ScriptableObject\CraftConfiguration.cs" />
+     <Compile Include="Assets\Scripts\FontMaker.cs" />
+     <Compile Include="Assets\Scripts\AnimatedChar.cs" />
+     <Compile Include="Assets\Scripts\AnimatedNumber.cs" />
+     <Compile Include="Assets\Scripts\Bullet.cs" />
+     <Compile Include="Assets\Scripts\BulletManager.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

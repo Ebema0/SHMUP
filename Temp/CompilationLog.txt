@@ -1,4 +1,0 @@
-# Starting compiling Unity.2D.Animation.Runtime.dll
-C:\Program Files\Unity\Editor\Data\Tools\RoslynScripts\unity_csc.bat /noconfig @Temp/UnityTempFile-d181a9fd4a5702748a4065a435243318
-# Starting IL post processing on Unity.2D.Animation.Runtime.dll
-"C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/bin/mono.exe" "C:/Program Files/Unity/Editor/Data/Tools/ILPostProcessorRunner/ILPostProcessorRunner.exe" @C:/Users/byben/GitHub/SHMUP/Temp/UnityTempFile-ed314498eb9dd9e489ddce4485ba922b

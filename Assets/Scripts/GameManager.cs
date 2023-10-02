@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -12,10 +11,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] craftPrefab;
 
-    
+    public Craft playerOneCraft = null;
 
-
-    Craft playerOneCraft = null;
+    public BulletManager bulletManager = null;
 
     void Start()
     {
@@ -28,6 +26,8 @@ public class GameManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
         Debug.Log("GameManager Created");
+
+        bulletManager = GetComponent<BulletManager>();
     }
 
     public void SpawnPlayer(int playerIndex, int craftType)
@@ -44,5 +44,15 @@ public class GameManager : MonoBehaviour
         {
             if (!playerOneCraft) SpawnPlayer(1, 0);
         }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (playerOneCraft) playerOneCraft.Explode();
+        }
+
+        if (Input.GetKey(KeyCode.S))
+            if (bulletManager)
+                bulletManager.SpawnBullet(BulletManager.BulletType.Bullet1_Size3, 0, 150, Random.Range(-10f, -10f), Random.Range(-10f, -10f) ,0);
+            
     }
 }

@@ -5,6 +5,7 @@ using System;
 
 public class Bullet : MonoBehaviour
 {
+   public int index;
 }
 
 [Serializable]

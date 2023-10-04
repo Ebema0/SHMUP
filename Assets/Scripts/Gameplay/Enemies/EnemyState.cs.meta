@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 8cfce801c7539624d8269cf3fad8646e
+guid: 869ce41ecd656934c9f959b3eb9d1fa1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - craftSprite: {fileID: 646280220929689500, guid: 6f9de6034a028844bba02f46fa80c13c, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

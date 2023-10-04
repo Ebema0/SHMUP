@@ -79,6 +79,13 @@
      <Compile Include="Assets\Scripts\ControllerMenu.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Beam.cs" />
      <Compile Include="Assets\Scripts\Menus\CraftSelectMenu.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Enemies\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemyPart.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemyPattern.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemySection.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemyStep.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Enemies\EnemyState.cs" />
+     <Compile Include="Assets\Scripts\ScriptableObject\Helpers.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

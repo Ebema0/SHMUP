@@ -167,7 +167,7 @@ public class Craft : MonoBehaviour
                     }
                 }
                 //Options Button
-                if (InputManager.instance.playerPrevState[playerIndex].options &&
+                if (!InputManager.instance.playerPrevState[playerIndex].options &&
                     InputManager.instance.playerState[playerIndex].options) 
                 {
                     craftData.optionsLayout++;
@@ -183,7 +183,7 @@ public class Craft : MonoBehaviour
                 }
 
                 // Bomb
-                if (InputManager.instance.playerPrevState[playerIndex].bomb &&
+                if (!InputManager.instance.playerPrevState[playerIndex].bomb &&
                     InputManager.instance.playerState[playerIndex].bomb)
                 {
                     FireBomb();

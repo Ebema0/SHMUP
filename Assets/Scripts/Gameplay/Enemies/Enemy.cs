@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public EnemyData data;
 
     private EnemyPattern pattern;
+
     private EnemySection[] sections;
 
     private void Start ()

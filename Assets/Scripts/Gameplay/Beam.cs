@@ -48,10 +48,16 @@ public class Beam : MonoBehaviour
         {
             craft.craftData.beamFiring = false;
             gameObject.SetActive(false);
-
+            beamFlash.SetActive(false);
             HideHits();
-
+            return;
         }
+        float scale = beamWidth/30f;
+        beamFlash.transform.localScale = new Vector3(scale, scale, 1);
+
+        float topY = 180;
+        if (GameManager.instance && GameMAnager.instance.progressWindow)
+            topY += GameManager.instance.progressWindow.transform.position.y;
 
         int maxColliders = 20;
         Collider[] hits = new Collider[maxColliders];
@@ -59,7 +65,7 @@ public class Beam : MonoBehaviour
         Vector2 halfSize = new Vector2(beamWidth*0.5f, (180-craft.transform.position.y)*0.5f);
         Vector3 center = new Vector3 (craft.transform.position.x , middleY, 0);
         int noOfHits = Physics.OverlapBoxNonAlloc(center, halfSize, hits, Quaternion.identity, layerMask);
-        float lowest = 180;
+        float lowest = topY;
         Shootable lowestShootable = null;
         Collider lowestCollider = null;
         if (noOfHits> 0)

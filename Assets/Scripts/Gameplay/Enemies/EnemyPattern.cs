@@ -74,13 +74,50 @@ public class EnemyPattern : MonoBehaviour
 
         EnemyStep step = steps[currentStateIndex];
 
-        float StepTime = progressTimer - StartTime(currentStateIndex);
+        float stepTime = progressTimer - StartTime(currentStateIndex);
         Vector3 startPos = EndPosition(currentStateIndex-1);
-        return step.CalculatePosition(startPos, StepTime);
+        return step.CalculatePosition(startPos, stepTime);
     }
 
     public Quaternion CalculateRotation(float progressTimer)
     {
         return Quaternion.identity;
+    }
+
+    int WhichStep(float timer)
+    {
+        float timerToCheck = timer;
+        for(int s=0; s<steps.Count;s++)
+        {
+            if (timerToCheck<steps[s].TimeToComplete())
+                return s;
+            timer -= steps[s].TimeToComplete();
+
+        }
+    }
+
+    public float StartTime(int step)
+    {
+        if (steps<=0) return 0;
+
+        float result = 0;
+        for(int s=0; s<step; s++)
+        {
+            result += steps[s].TimeToComplete();
+        }
+        return result;
+    }
+
+    public Vector3 EndPosition (int stepIndex)
+    {
+        Vector3 result = transform.position;
+        if(stepIndex>=0)
+        {
+            for(int s=0; s<=stepIndex;s++)
+            {
+                result = steps[s].EndPosition(result);
+            }
+        }
+        return result;
     }
 }

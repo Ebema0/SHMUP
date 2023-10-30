@@ -17,6 +17,8 @@ public class GameInitialiser : MonoBehaviour
 
     private bool menuLoaded = false;
 
+    private Scene displayScene;
+
     void Start()
     {
         if (GameManager.instance == null)
@@ -24,6 +26,8 @@ public class GameInitialiser : MonoBehaviour
             if (gameManagerPrefab)
             {
                 Instantiate(gameManagerPrefab);
+                Debug.Log("Instantiating gameManager");
+                displayScene = SceneMAnager.GetScenesByName("DisplayScene");
             }
             else
                 Debug.LogError("gameManagerprefab isn¨t set");
@@ -35,6 +39,10 @@ public class GameInitialiser : MonoBehaviour
     {
         if (!menuLoaded)
         {
+            if(!displayScene.isLoaded)
+            {
+                SceneManager.LoadScene("DisplayScene", LoadSceneMode.Addative);
+            }
             switch (gameMode)
             {
                 case GameMode.Menus:

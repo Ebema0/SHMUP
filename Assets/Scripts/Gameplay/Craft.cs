@@ -59,7 +59,7 @@ public class Craft : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         Debug.Assert(spriteRenderer);
 
-        layerMask = LayerMask.GetMask("PlayerBullet") & ~LayerMask.GetMask("PlayerBombs");
+        layerMask = LayerMask.GetMask("PlayerBullet") & ~LayerMask.GetMask("PlayerBombs") & ~LayerMask.GetMask("Player");
 
         craftData.beamCharge = (char)100;
     }
@@ -98,14 +98,22 @@ public class Craft : MonoBehaviour
                 int noOfHits = Physics.OverlapBoxNonAlloc(transform.position, halfSize, hits);
                 if (noOfHits>0)
                 {
-                    if (!invunerable)
-                        Explode();
+                    hits();
                 }
                 // Movement
                     craftData.positionX += InputManager.instance.playerState[0].movement.x;
                     craftData.positionY += InputManager.instance.playerState[0].movement.y;
+                    if (craftData.positionX<-146) craftData.positionX = -146;
+                    if (craftData.positionX<146) craftData.positionX = 146;
                     newPosition.x = (int)craftData.positionX;
-                    newPosition.y = (int)craftData.positionY;
+                if (GameManager.instance.progressWindow)
+                    if (!GameManager.instance.progressWindow)
+                        GameManager.instance.progressWindow = GameObject.FindObjectLevelType<LevelProgress>();
+
+                            if (GameManager.instance.progressWindow)
+                     newPosition.y = (int)craftData.positionY + GameManager.instance.progressWindow.transform.position.y;
+                else
+                    newPosition.y = (int)craftData.positionY
                     gameObject.transform.position = newPosition;
 
                 if (InputManager.instance.playerState[playerIndex].up)
@@ -190,6 +198,11 @@ public class Craft : MonoBehaviour
                 }
             }
         }
+    }
+    public void Hit ()
+    {
+        if (!invunerable)
+            Explode();
     }
     public void Explode()
     {

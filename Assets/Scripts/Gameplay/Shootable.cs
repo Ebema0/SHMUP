@@ -6,12 +6,15 @@ public class Shootable : MonoBehaviour
 {
 
     public int   health = 10;
-    public float radius = 10;
+    public float radiusOrWidth = 10;
+    public float height = 10;
     private int  layerMask = 0;
+    public bool box = false;
 
    private void Start()
     {
         layerMask = ~LayerMask.GetMask("Enemy") &  ~LayerMask.GetMask("EnemyBullet");
+        halfExtent = new Vector3(radiusOrWidth/2, height/2, 1);
     }
 
     // Update is called once per frame
@@ -19,7 +22,13 @@ public class Shootable : MonoBehaviour
     {
         int maxColliders = 10;
         Collider[] hits = new Collider[maxColliders];
-        int noOfHits = Physics.OverlapSphereNonAlloc(transform.position, radius, hits, layerMask);
+        int noOfHits = 0;
+        if (box)
+            noOfHits = Physics.OverlapBoxNonAlloc(transform.position, radiusOrWidth, hits, layerMask);
+        else
+            noOfHits = Physics.OverlapSphereNonAlloc(transform.position, radiusOrWidth, hits, layerMask);
+
+        
         if (noOfHits>0)
 
         {

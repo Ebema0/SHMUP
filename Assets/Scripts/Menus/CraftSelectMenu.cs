@@ -19,12 +19,7 @@ public class CraftSelectMenu : Menu
  
     public void OnPlayButton()
     {
-        TurnOff(false);
-        CraftSelectMenu.instance.TurnOn(this);
+        GameManager.instance.StartGame();
     }
-    public void OnBackButton()
-    { 
-        TurnOff(true);
-      
-    }
+   
 }

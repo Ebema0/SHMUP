@@ -17,8 +17,10 @@ public struct BulletData
     public float dX;
     public float dY;
     public float angle;
+    public float dAngle;
     public int type;
     public bool active;
+    public bool homing;
 
 
     public BulletData(float inX,
@@ -26,8 +28,10 @@ public struct BulletData
                     float inDX,
                     float inDY,
                     float inAngle,
-                    int intType,
-                    bool inActive)
+                    float inDAngle,
+                    int   intType,
+                    bool  inActive,
+                    bool  inHoming)
     {
         positionX = inX;
         positionY = inY;
@@ -36,6 +40,7 @@ public struct BulletData
         angle     =inAngle;
         type      =intType;
         active    =inActive;
+        homing = inHoming;
     }
 
 }

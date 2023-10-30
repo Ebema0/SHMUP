@@ -17,15 +17,39 @@ public class BulletSpawner : MonoBehaviour
     public float endAngle = 0;
     public int radialNumber = 1;
 
+    public float dAngle = 0; // change is angle
+
     public GameObject muzzleFlash = null;
 
     public bool autoFireActive = false;
+    private bool firing = false;
+    private int frame = 0;
+
+    public bool fireAtPlayer = false;
+    public bool fireAtTarget = false;
+    public GameObject target = null;
+    public bool cleverShot = false;
+
+    public bool homing = false;
 
     public void Shoot (int size)
     {
         if (size<0) return;
 
-        if(timer==0)
+        Vector2 primaryDirection = trasform.up;
+        if (fireAtPlayer || fireAtTarget)
+        {
+            Vector2 targetPosition;
+            if (fireAtTarget)
+                targetPosition = GameManager.instance.playerOneCraft.transform,position;
+            else if (fireAtTarget && target.transform.position;
+
+            primaryDirection = targetPosition - (Vector2)transform.position;
+            primaryDirection.Normalize();
+
+        }
+
+        if(firing || timer==0) // Shoot 
         {
             float angle = startAngle;
             for (int a = 0; a<radialNumber; a++)
@@ -39,7 +63,8 @@ public class BulletSpawner : MonoBehaviour
                                                                transform.position.y,
                                                                velocity.x,
                                                                velocity.y,
-                                                               0);
+                                                               angle,dAngle,
+                                                               homing);
                 angle = angle + ((endAngle -startAngle/(radialNumber-1));
             }
         }
@@ -52,13 +77,36 @@ public class BulletSpawner : MonoBehaviour
         if(timer>=rate)
         {
             timer = 0;
-            Shoot(1);
+            if (muzzleFlash)
+                muzzleFlash.SetActive(false);
+            if (autoFireActive)
+            {
+                firing = true
+                    frame = 0;
+            }
         }
         
+        if (firing)
+        {
+            if (sequence.ShouldFire(frame))
+                Shoot(1);
+
+            frame++
+                if (frame>sequence.totalFrames)
+                firing = false;
+        }
+    }
+    public void Active()
+    {
+        autoFireActive = false;
+        timer = 0;
+        frame = 0;
+        firing = true;
     }
     public void Deactive()
     {
         autoFireActive = false;
+        
     }
 
 }

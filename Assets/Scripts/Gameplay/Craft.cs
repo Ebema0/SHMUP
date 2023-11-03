@@ -59,7 +59,10 @@ public class Craft : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         Debug.Assert(spriteRenderer);
 
-        layerMask = LayerMask.GetMask("PlayerBullet") & ~LayerMask.GetMask("PlayerBombs") & ~LayerMask.GetMask("Player");
+        layerMask = LayerMask.GetMask("PlayerBullet") &
+            ~LayerMask.GetMask("PlayerBombs") &
+             ~LayerMask.GetMask("GroundEnemy") &
+            ~LayerMask.GetMask("Player");
 
         craftData.beamCharge = (char)100;
     }
@@ -103,9 +106,14 @@ public class Craft : MonoBehaviour
                 // Movement
                     craftData.positionX += InputManager.instance.playerState[0].movement.x;
                     craftData.positionY += InputManager.instance.playerState[0].movement.y;
+
                     if (craftData.positionX<-146) craftData.positionX = -146;
-                    if (craftData.positionX<146) craftData.positionX = 146;
-                    newPosition.x = (int)craftData.positionX;
+                    if (craftData.positionX>146) craftData.positionX = 146;
+
+                if (craftData.positionX<-180) craftData.positionX = -180;
+                if (craftData.positionX>180) craftData.positionX = 180;
+
+                newPosition.x = (int)craftData.positionX;
                 if (GameManager.instance.progressWindow)
                     if (!GameManager.instance.progressWindow)
                         GameManager.instance.progressWindow = GameObject.FindObjectLevelType<LevelProgress>();

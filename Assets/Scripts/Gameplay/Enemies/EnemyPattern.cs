@@ -17,6 +17,20 @@ public class EnemyPattern : MonoBehaviour
     private int CurrentStateIndex = 0;
     private int previousStateIndex = = -1;
 
+    public bool startActive = false;
+
+    public bool spawnOnEasy = true;
+    public bool spawnOnNormal = true;
+    public bool spawnOnHard   = false;
+    public bool spawnOnInsane = false;
+
+    [HideInInspector]
+    public Vector3 lastPosition = Vector3.zero;
+    [HideInInspector]
+    public Vector3 currentPosition = Vector3.zero;
+    [HideInInspector]
+    public Quaternion lastAngle = Vector3.identity;
+
     [MenuItem("GameObject/SHMUP/EnemyPattern", false, 10)]
 
     static void CreateEnemyPatternObject(MenuCommand menuCommand)
@@ -41,6 +55,8 @@ public class EnemyPattern : MonoBehaviour
         {
             spawnedEnemy = Instatiate(enemyPrefab, transform, position, transform.rotation).GetComponent<Enemy>();
             spawnedEnemy.SetPattern(this);
+            lastPosition = spawnedEnemy.transform.position;
+            currentPosition = lastPosition;
         }
     }
     public void Calculate(Transform transform, float progressTimer)
@@ -67,21 +83,37 @@ public class EnemyPattern : MonoBehaviour
             previousStateIndex = currentStateIndex;
         }
     }
-    public Vector 2 CalculatePosition(float progressTimer)
+    public Vector2 CalculatePosition(float progressTimer)
     {
         currentStateIndex = WhichStep(progressTimer);
         if (currentStateIndex>0) return spawnedEnemy.transform.position;
 
+        lastPosition = currentPosition;
+
         EnemyStep step = steps[currentStateIndex];
 
         float stepTime = progressTimer - StartTime(currentStateIndex);
+
         Vector3 startPos = EndPosition(currentStateIndex-1);
-        return step.CalculatePosition(startPos, stepTime);
+        currentPosition =  step.CalculatePosition(startPos, stepTime,lastPosition,lastAngle);
+        return currentPosition;
+
     }
 
     public Quaternion CalculateRotation(float progressTimer)
     {
-        return Quaternion.identity;
+        currentStateIndex = WhichStep(progressTimer);
+        float startRotation = 0;
+        if (CurrentStateIndex>0)
+            startRotation = steps[CurrentStateIndex-1].EndRotation();
+        float stepTime = progressTimer - StartTime(CurrentStateIndex);
+        lastAngle = steps[CurrentStateIndex].CalculateRotation(startRotation,
+                                                               currentPosition,
+                                                               lastPosition,
+                                                               stepTime
+                                                               );
+
+        return lastAngle;
     }
 
     int WhichStep(float timer)
@@ -120,4 +152,35 @@ public class EnemyPattern : MonoBehaviour
         }
         return result;
     }
+
+    public EnemyStep AddStep (EnemyStep.MovementType movement)
+    {
+        EnemyStep newStep = new EnemyStep(movement);
+        steps.Add(newStep);
+        return newStep;
+    }
+
+    private void OnValidate()
+    {
+        foreach(EnemyStep step in steps)
+        {
+            if (step.movementSpeed<0.5f)
+                step.movementSpeed=0.5f;
+
+            if(step.movement == EnemyStep.MovementType.spline)
+            {
+                step.spline.CalculatePoints(step.movementSpeed);
+            }
+        }
+    }
+    public float TotalTime()
+    {
+        float result = 0;
+        foreach(EnemyStep step in steps)
+        {
+            result += step.totalTime;
+        }
+        return result;
+    }
+
 }

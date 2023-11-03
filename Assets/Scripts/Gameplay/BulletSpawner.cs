@@ -32,9 +32,20 @@ public class BulletSpawner : MonoBehaviour
 
     public bool homing = false;
 
+    public bool isPlayer = false;
+
     public void Shoot (int size)
     {
         if (size<0) return;
+
+        if(!isPlayer)
+        {
+            float y = transform.position.y;
+            if (GameManager.instance && GameManager.instance.progressWindow)
+                y+= GameManager.instance.progressWindow.data.positionY;
+            if (y<-100 || y>180)
+                return;
+        }
 
         Vector2 primaryDirection = trasform.up;
         if (fireAtPlayer || fireAtTarget)

@@ -61,8 +61,8 @@ public class Beam : MonoBehaviour
 
         int maxColliders = 20;
         Collider[] hits = new Collider[maxColliders];
-        float middleY = (craft.transform.position.y);
-        Vector2 halfSize = new Vector2(beamWidth*0.5f, (180-craft.transform.position.y)*0.5f);
+        float middleY = (craft.transform.position.y + topY)*0.5f;
+        Vector2 halfSize = new Vector2(beamWidth*0.5f, (topY-craft.transform.position.y)*0.5f);
         Vector3 center = new Vector3 (craft.transform.position.x , middleY, 0);
         int noOfHits = Physics.OverlapBoxNonAlloc(center, halfSize, hits, Quaternion.identity, layerMask);
         float lowest = topY;
@@ -72,16 +72,20 @@ public class Beam : MonoBehaviour
         {
             for (int hit = 0; hit<noOfHits; hit++)
             {
-                RaycastHit hitInfo;
-                Ray ray = new Ray(craft.transform.position, Vector3.up);
-                float height = 180 -craft.transform.position.y;
-                if (hits[hit].Raycast(ray,out hitInfo,height))
+                Shootable shootable = hits[hit].GetCompoonent<Shootable>();
+                if (shootable && shootable.damagedByBeams)
                 {
-                    if (hitInfo.point.y < lowest)
+                    RaycastHit hitInfo;
+                    Ray ray = new Ray(craft.transform.position, Vector3.up);
+                    float height = topY -craft.transform.position.y;
+                    if (hits[hit].Raycast(ray, out hitInfo, height))
                     {
-                        lowest = hitInfo.point.y;
-                        lowestShootable = hits[hit].GetComponent<Shootable>();
-                        lowestCollider = hits[hit];
+                        if (hitInfo.point.y < lowest)
+                        {
+                            lowest = hitInfo.point.y;
+                            lowestShootable = hits[hit].GetComponent<Shootable>();
+                            lowestCollider = hits[hit];
+                        }
                     }
                 }
             }

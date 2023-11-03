@@ -23,7 +23,20 @@ public class Enemy : MonoBehaviour
     private FixedUpdate()
     {
         data.progressTimer++;
+        if(pattern)
         pattern.Calculate(transform, data.progressTimer);
+
+        // off screen check
+        float y = transform.position.y;
+        if (GameManager.instance&&GameManager.instance.progressWindow)
+            y-= GameManager.instance.progressWindow.data.positionY;
+        if (y<-200)
+            OutOfBounds();
+    }
+
+    void OutOffBounds()
+    {
+        Destroy(gameObject);
     }
 
     public void EnableState(string name)

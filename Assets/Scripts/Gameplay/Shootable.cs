@@ -13,6 +13,9 @@ public class Shootable : MonoBehaviour
 
     private Vector halfExtent;
 
+    public bool spawnCyclicPickUp = false;
+    public PickUp[] spawnSpecificPickup;
+
     public bool damagedByBullets = true;
     public bool damagedByBeams = true;
     public bool damagedByBombs = true;
@@ -65,6 +68,28 @@ public class Shootable : MonoBehaviour
     {
         health -= ammount;
         if (health<=0)
-        Destroy(gameObject);
+        {
+            Vector2 pos = transform.position;
+            {
+                if(spawnCyclicPickUp)
+                {
+                    PickUp spawn = GameManager.instance, GetNextDrop();
+                    PickUp p = Instantiate(spawn, pos, Quaternion.identity);
+                    if (p)
+                        p.transform.SetParent(GameManager.instance.transform);
+                }
+                foreach(PickUp pickUp in spawnSpecificPickup)
+                {
+                    pickUp p = Instantiate(pickUp, pos, Quaternion.identity);
+                    if(p)
+                    {
+                        p.transform.SetParent(Gamanager.instance.transform);
+                    }
+                    else Debug.LogError("Faled to spawn pickup")
+                }
+            }
+            Destroy(gameObject);
+        }
+
     }
 }

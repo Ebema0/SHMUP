@@ -17,7 +17,6 @@ public class Craft : MonoBehaviour
     public GameObject FrontFlame2;
 
 
-
     public int playerIndex;
 
     public CraftConfiguration config;
@@ -63,6 +62,7 @@ public class Craft : MonoBehaviour
             ~LayerMask.GetMask("PlayerBombs") &
              ~LayerMask.GetMask("GroundEnemy") &
             ~LayerMask.GetMask("Player");
+        pickUpLayer = LayerMask.NameToLayer("PickUp");
 
         craftData.beamCharge = (char)100;
     }
@@ -97,14 +97,42 @@ public class Craft : MonoBehaviour
                 // Hit Detection
                 int maxCollider = 10;
                 Collider[] hits = new Collider[maxCollider];
+
+                // Bullets Hits
                 Vector2 halfSize = new Vector2(3f, 4f);
                 int noOfHits = Physics.OverlapBoxNonAlloc(transform.position, halfSize, hits);
-                if (noOfHits>0)
+                if (noOfHits >0)
                 {
-                    hits();
+                    foreach (Collider hit in hits)
+                    {
+                        if (hit)
+                        {
+                            if (hit.gameObject.layer == pickUpLayer)
+                                PickUp(hit.GetComponent<PickUp>());
+                            Hit();
+                        }
+                    }
+                }
+
+                // PickUps and Bullet Crazings
+                halfSize = new Vector2(15f, 21f);
+                int noOfHits = Physics.OverlapBoxNonAlloc(transform.position, halfSize, hits);
+                if (noOfHits >0)
+                {
+                    foreach (Collider hit in hits)
+                    {
+                        if (hit)
+                        {
+                            if (hit.gameObject.layer == pickUpLayer)
+                                PickUp(hit.GetComponent<PickUp>());
+                            else // Bullet Graze
+                                craftData.beamCharge++;
+
+                        }
+                    }
                 }
                 // Movement
-                    craftData.positionX += InputManager.instance.playerState[0].movement.x;
+                craftData.positionX += InputManager.instance.playerState[0].movement.x;
                     craftData.positionY += InputManager.instance.playerState[0].movement.y;
 
                     if (craftData.positionX<-146) craftData.positionX = -146;
@@ -188,7 +216,7 @@ public class Craft : MonoBehaviour
                 {
                     craftData.optionsLayout++;
                     if(craftData.optionsLayout>3)
-                        craftData.optionsLayout = (char)0;
+                        craftData.optionsLayout = 0;
                     SetOptionsLayout(craftData.optionsLayout);
                 }
 
@@ -207,6 +235,15 @@ public class Craft : MonoBehaviour
             }
         }
     }
+
+    public void PickUp(PickUp pickUp)
+    {
+        if(pickUp)
+        {
+            pickUp.ProcessPickUp(playerIndex, craftData); 
+        }
+    }
+
     public void Hit ()
     {
         if (!invunerable)
@@ -285,13 +322,50 @@ public class Craft : MonoBehaviour
 
     void FireBomb()
     {
-        Vector3 pos = transform.position;
-        newPosition.y += 100;
-        Instantiate(bombPrefab,newPosition,Quaternion.identity);
+        if (craftData.smallBombs>0)
+        {
+            craftData.smallBombs--;
+            Vector3 pos = transform.position;
+            pos.y += 100;
+            Instantiate(bombPrefab, pos, Quaternion.identity);
+        }
     }
-    
+
+    public void PowerUp(byte powerLevel)
+    {
+        craftData.shotPower += powerLevel;
+        if (craftData.shotPower>8)
+            craftData.shotPower = 8;
+    }
+
+    public void IncreaseScore(int value)
+    {
+        GameManager.instance.playerDatas[playerIndex].score += value;
+    }
+    public void OneUp()
+    {
+        GameManager.instance.playerDatas[playerIndex].lives++;
+    }
+
+    public void AddMedal(int level, int value)
+    {
+        IncreaseScore(value);
+    }
+
+    public void AddBomb(int power)
+    {
+        if (power==1)
+        {
+            craftData.smalBombs++;
+            else if (power==2)
+                craftData.largeBombs++;
+            else
+                Debug.LogError("Invalid boomb power pick up");
+        }
+    }
 }
 
+[Serializable]
 public class CraftData
 {
     public float positionX;
@@ -306,4 +380,7 @@ public class CraftData
     public char beamPower;  //Power settings and widht
     public char beamCharge;  // max charge
     public char beamTimer;   // current charge level
+
+    public byte smallBombs;
+    public byte largeBombs;
 }

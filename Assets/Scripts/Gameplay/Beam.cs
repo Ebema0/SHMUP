@@ -9,7 +9,7 @@ public class Beam : MonoBehaviour
     public Craft craft = null;
     private int layerMask = 0;
 
-    
+    const int MINIMUMCHARGE = 10;
 
     public GameObject beamFlash = null;
     public GameObject[] beamHits = new GameObject[5];
@@ -21,16 +21,19 @@ public class Beam : MonoBehaviour
     // Update is called once per frame
     public void Fire()
     {
+
         if (!craft.craftData.beamFiring)
-        {
-            craft.craftData.beamFiring = true;
-            craft.craftData.beamTimer = craft.craftData.beamCharge;
-            UpdateBeam();
-            float scale = beamWidth/30f;
-            beamFlash.transform.localScale = new Vector3(scale,scale,1);
-            gameObject.SetActive(true);
-            beamFlash.SetActive(true);
-        }
+            if (craft.craftData.beamCharge>MINIMUMCHARGER)
+            {
+                {
+                    craft.craftData.beamFiring = true;
+                    craft.craftData.beamTimer = craft.craftData.beamCharge;
+                    craft.craftData.beamCharge = 0;
+                    UpdateBeam();
+                    gameObject.SetActive(true);
+                    beamFlash.SetActive(true);
+                }
+            }
     }
     
     void FixedUpdate()
@@ -39,12 +42,13 @@ public class Beam : MonoBehaviour
     }
     void HideHits()
     {
-
+        for (int h = 0; h<5; h++)
+            beamHits[h].SetActive(false);
     }
     void UpdateBeam()
     {
-        craft.craftData.beamTimer--;
-        if(craft.craftData.beamTimer==0)
+       if(craft.craftData.beamTimer>0)  craft.craftData.beamTimer--;
+        if(craft.craftData.beamTimer==0) // Beam Finished
         {
             craft.craftData.beamFiring = false;
             gameObject.SetActive(false);

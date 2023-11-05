@@ -7,6 +7,7 @@ public class PickUp : MonoBehaviour
    public enum PickUpType
     {
         INVALID, 
+
         Bomb,
         Coin,
         BeamUp,

@@ -32,13 +32,15 @@ public class BulletSpawner : MonoBehaviour
 
     public bool homing = false;
 
-    public bool isPlayer = false;
+    //public bool isPlayer = false;
+
+    public byte playerIndex = 2;
 
     public void Shoot (int size)
     {
         if (size<0) return;
 
-        if(!isPlayer)
+        if(playerIndex>1)
         {
             float y = transform.position.y;
             if (GameManager.instance && GameManager.instance.progressWindow)
@@ -75,7 +77,7 @@ public class BulletSpawner : MonoBehaviour
                                                                velocity.x,
                                                                velocity.y,
                                                                angle,dAngle,
-                                                               homing);
+                                                               homing,playerIndex);
                 angle = angle + ((endAngle -startAngle/(radialNumber-1));
             }
         }

@@ -32,6 +32,8 @@ public class Craft : MonoBehaviour
     const int INVUNERABLELENGTH = 120;
     bool alive = true;
 
+    public static int MAXIMUMBEAMCHARGE = 64; 
+
     SpriteRenderer spriteRenderer = null;
     int layerMask = 0;
     public BulletSpawner [] bulletSpawner = new BulletSpawner[5];
@@ -75,9 +77,14 @@ public class Craft : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         if (InputManager.instance && alive)
         {
+            // Chain Drop 
+            if (GameManager.instance.playerDatas[playerIndex].chainTimer>0)
+            {
+                GameManager.instance.playerDatas[playerIndex].chainTimer--;
+                if GameManager.instance.playerDatas[playerIndex].chain = 0;
+            }
             //Invurnable flashing 
 
             if (invunerable)
@@ -126,11 +133,15 @@ public class Craft : MonoBehaviour
                             if (hit.gameObject.layer == pickUpLayer)
                                 PickUp(hit.GetComponent<PickUp>());
                             else // Bullet Graze
+                            if (craftData.beamCharge<MAXIMUMBEAMCHARGE)
+                            {
                                 craftData.beamCharge++;
-
+                                craftData.beamTimer++;
+                            }
                         }
                     }
                 }
+
                 // Movement
                 craftData.positionX += InputManager.instance.playerState[0].movement.x;
                     craftData.positionY += InputManager.instance.playerState[0].movement.y;
@@ -327,7 +338,9 @@ public class Craft : MonoBehaviour
             craftData.smallBombs--;
             Vector3 pos = transform.position;
             pos.y += 100;
-            Instantiate(bombPrefab, pos, Quaternion.identity);
+            Bomb bomb = Instantiate(bombPrefab, pos, Quaternion.identity).GetComponent<Bomb>();
+            if (bomb)
+                bomb.playerIndex = (byte)playerIndex;
         }
     }
 
@@ -341,6 +354,7 @@ public class Craft : MonoBehaviour
     public void IncreaseScore(int value)
     {
         GameManager.instance.playerDatas[playerIndex].score += value;
+        GameManager.instance.playerDatas[playerIndex].stagecore += value;
     }
     public void OneUp()
     {

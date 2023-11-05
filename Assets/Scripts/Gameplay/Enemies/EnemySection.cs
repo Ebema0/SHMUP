@@ -24,4 +24,20 @@ public class EnemySection : MonoBehaviour
         }
     }
 
+    public void UPdateStateTimer(string name)
+    {
+        foreach (EnemyState state in states)
+        {
+            if (state.active)
+                state.IncrementTime();
+        }
+    }
+
+    public void TimeOutMessage()
+    {
+        Enemy enemy = trasform.parent.GetComponent<Enemy>();
+        if (enemy)
+            enemy.TimeOutDestruct();
+    }
+
 }

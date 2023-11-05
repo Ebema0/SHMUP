@@ -50,12 +50,12 @@ public class EnemyBeam : MonoBehaviour
         if (!charging)
         {
             int maxColliders = 20;
-            Collider[] hits = new Collider[maxColliders];
+            Collider2D[] hits = new Collider2D[maxColliders];
 
             Vector2 center = Vector2.Lerp(transform.position, endPoint.transform.position, 0.5f);
-            Vector2 halfsize = new Vector2(beamWidth*0.5f, (endPoint.transform.position).magnitude);
+            Vector2 halfsize = new Vector2(beamWidth*0.5f, (endPoint.transform.position - transform.position).magnitude*0.5);
 
-            int noOfHits = Physics.OverlapBoxNonAlloc(center, halfsize, hits, transform.rotation, layerMask);
+            int noOfHits = Physics2D.OverlapBoxNonAlloc(center, halfsize, hits, transform.eulerAngles.z,hits, layerMask);
             for (int h = 0; h<noOfHits; h++)
             {
                 Craft craft = hits[h].GetComponent<Craft>();

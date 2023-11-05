@@ -103,14 +103,14 @@ public class Craft : MonoBehaviour
 
                 // Hit Detection
                 int maxCollider = 10;
-                Collider[] hits = new Collider[maxCollider];
+                Collider2D[] hits = new Collider2D[maxCollider];
 
                 // Bullets Hits
                 Vector2 halfSize = new Vector2(3f, 4f);
-                int noOfHits = Physics.OverlapBoxNonAlloc(transform.position, halfSize, hits);
+                int noOfHits = Physics2D.OverlapBoxNonAlloc(transform.position,0, halfSize, hits);
                 if (noOfHits >0)
                 {
-                    foreach (Collider hit in hits)
+                    foreach (Collider2D hit in hits)
                     {
                         if (hit)
                         {
@@ -123,10 +123,10 @@ public class Craft : MonoBehaviour
 
                 // PickUps and Bullet Crazings
                 halfSize = new Vector2(15f, 21f);
-                int noOfHits = Physics.OverlapBoxNonAlloc(transform.position, halfSize, hits);
+                int noOfHits = Physics.OverlapBoxNonAlloc(transform.position,0, halfSize, hits);
                 if (noOfHits >0)
                 {
-                    foreach (Collider hit in hits)
+                    foreach (Collider2D hit in hits)
                     {
                         if (hit)
                         {

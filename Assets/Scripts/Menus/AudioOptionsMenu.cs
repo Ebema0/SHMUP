@@ -6,6 +6,10 @@ public class AudioOptionsMenu : Menu
 {
     public static AudioOptionsMenu instance = null;
 
+    public Slider masterVolSilder = null;
+    public Slider fxVolSilder = null;
+    public Slider musicVolSilder = null;
+
     void Start()
     {
         if(instance)
@@ -15,13 +19,38 @@ public class AudioOptionsMenu : Menu
             return;
 
         }
-        instance= this;
+        instance = this;
     }
 
     public void BackButton()
     {
         TurnOff(false);
-        MainMenu.instance.TurnOn(this);
     }
-    
+    public void UpdateMasterVolume(float value)
+    {
+        float volume = Mathf.Clamp(value, 0.0001f, 1);
+        AudioManager.instance.mixer.SetFloat("MasterVolume", Mathf.Log10(volume)*20;
+
+        PlayerPref.SetFloat("MasterVolume", volume);
+        PlayerPref.Save();
+    }
+
+    public void UpdateSFXVolume(float value)
+    {
+        float volume = Mathf.Clamp(value, 0.0001f, 1);
+        AudioManager.instance.mixer.SetFloat("EffectVolume", Mathf.Log10(volume)*20;
+
+        PlayerPref.SetFloat("MasterVolume", volume);
+        PlayerPref.Save();
+    }
+
+    public void UpdateMusicVolume(float value)
+    {
+        float volume = Mathf.Clamp(value, 0.0001f, 1);
+        AudioManager.instance.mixer.SetFloat("MusicVolume", Mathf.Log10(volume)*20;
+
+        PlayerPref.SetFloat("MasterVolume", volume);
+        PlayerPref.Save();
+    }
+
 }

@@ -11,7 +11,10 @@ public class GameInitialiser : MonoBehaviour
         Gameplay
     }
 
+    public int stageNumber = 0;
+
     public GameMode gameMode;
+
 
     public GameObject gameManagerPrefab = null;
 
@@ -49,9 +52,12 @@ public class GameInitialiser : MonoBehaviour
             {
                 case GameMode.Menus:
                     MenuManager.instance.SwitchToMainMenuMenus();
+                    GameManager.instance.gameState = GameManager.GameState.InMenus;
                     break;
                 case GameMode.Gameplay:
                     MenuManager.instance.SwitchToGameplayMenus();
+                    GameManager.instance.gameState = GameManager.GameState.InMenus;
+                    GameManager.instance.gameState.stage = stageNumber;
                     break;
             };
 
@@ -59,7 +65,7 @@ public class GameInitialiser : MonoBehaviour
                 AudioManager.instance.PlayMusicTrack(playMusicTrack, true, 1);
 
             if (gameMode == GameMode.Gameplay)
-                gameManager.instance.SpawnPlayers();
+                GameManager.instance.SpawnPlayers();
 
             menuLoaded = true;
         }

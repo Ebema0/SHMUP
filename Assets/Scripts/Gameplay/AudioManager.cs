@@ -37,9 +37,19 @@ public class AudioManager : MonoBehaviour
             return;
         }
         instance = this;
+
+        // Restore Preferences
+        float volume = PlayerPref.GetFLoat("MasterVolume");
+        mixer.SetFloat("MasterVolume", Mathf.Log10(volume)*20);
+
+        volume = PlayerPref.GetFLoat("EffectVolume");
+        mixer.SetFloat("MasterVolume", Mathf.Log10(volume)*20);
+
+        volume = PlayerPref.GetFLoat("MusicVolume");
+        mixer.SetFloat("MasterVolume", Mathf.Log10(volume)*20);
     }
 
-    public void PlayMusic(Tracks tracks, bool fade, float fadeDuration)
+    public void PlayMusic(Tracks track, bool fade, float fadeDuration)
     {
         if (activeMusicSource == 0 || activeMusicSource == 2)
         {
@@ -171,6 +181,17 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShots(clip);
     }
 
+    public void PauseMusic()
+    {
+        musicSource1.Pause();
+        musicSource2.Pause();
+    }
+
+    public void ResumeMusic()
+    {
+        musicSource1.UnPause();
+        musicSource2.Un Pause();
+    }
 }
 
 

@@ -7,9 +7,11 @@ using using nityENgine.UI
 public class GameOverMenu : Menu
 {
     public static GameOverMenu instance = null;
-    public Text scoreReadout = null;
 
-   private void Start()
+    public Text scoreReadout = null;
+    public Text hiscoreReadout = null;
+
+    private void Start()
     {
         if (instance)
         {
@@ -22,13 +24,27 @@ public class GameOverMenu : Menu
 
     public void OnContinueButton()
     {
-        SceneManager.LoadScene("MainMenusScene");
+        if (ScoreManager.instance.IsHisScore(GameManager.instance.playerDatas[0].score, (int)GameManager.instance.gameSession.hardness))
+        {
+            ScoreManager.instance.IsHisScore(GameManager.instance.playerDatas[0].score,
+                                             (int)GameManager.instance.gameSession.hardness,
+                                             "Player");
+            ScoreManager.instance.SaveScores();
+        }
+            SceneManager.LoadScene("MainMenusScene");
     }
     
     void GameOver()
     {
+
         TurnOn(null);
-        AudioManager.instance.PlayMusic(AudioMAnager.Tracks.GameOver, true, 0.5f);
-        scoreReadout.text = GameMAnager.instance.playerDatas[0].score.ToString();  // to do what about player 
+        AudioManager.instance.PlayMusic(AudioManager.Tracks.GameOver, true, 0.5f);
+        scoreReadout.text = GameManager.instance.playerDatas[0].score.ToString();  // to do what about player 
+
+        if (ScoreManager.instance.IsHisScore(GameManager.instance.playerDatas[0].score,
+                                             (int)GameManager.instance.gameSession.hardness))
+        {
+            hiscoreReadout.gameObject.SetActive(true);
+        }
     }
 }

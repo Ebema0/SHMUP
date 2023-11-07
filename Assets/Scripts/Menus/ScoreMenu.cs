@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreMenu : Menu
 {
     public static ScoreMenu instance = null;
+
+    public Text[] scores;
+    public Text[] names;
 
     void Start()
     {
@@ -21,15 +25,32 @@ public class ScoreMenu : Menu
     {
         TurnOff(true);
     }
+
    
-   public void OnRightButton()
+   public void OnPrevButton()
     {
-        TurnOff(false);
-        CraftSelectMenu.instance.TurnOn(this);
+       
     }
-    public void OnLeftButton()
+
+    public void OnFriendsButton()
     {
-        TurnOff(false);
-        CraftSelectMenu.instance.TurnOn(this);
+        
+    }
+    public void OnBackButton()
+    {
+        TurnOff(true);
+    }
+
+    public override void TurnOn(Menu previous)
+    {
+        base.TurnOn(previous);
+
+        int hardness = 0; 
+
+    for(int s=0; s<8; s++)
+        {
+            scores[s].text = ScoreManager.instance.scores[s, hardness]();
+            names[s].text = ScoreManager.instance.names[s, hardness]();
+        }
     }
 }

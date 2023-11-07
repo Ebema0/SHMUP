@@ -33,6 +33,14 @@ public class Shootable : MonoBehaviour
 
     public SoundFX destroyedSounds = null;
 
+    public bool flashing = false;
+    private float flashTimer = 0;
+
+    private SpriteRenderer spriteRenderer = null;
+
+    public bool LargeExplosion = false;
+    public bool smallExplosion = false;
+
     private void Start()
     {
 
@@ -46,22 +54,36 @@ public class Shootable : MonoBehaviour
         }
         else
         halfExtent = new Vector3(radiusOrWidth/2, height/2, 1);
+
+        spriteRenderer  = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
         if (destroyed) return;
+
+        if(flashing)
+        {
+            flashTimer -= Time.DeltaTime;
+            if(flashTimer<=0)
+            {
+                spriteRenderer.material.SetColor("_OverBringht", Color.black);
+                flashing = false;
+            }
+        }
       
         int maxColliders = 10;
         Collider2D[] hits = new Collider2D[maxColliders];
         int noOfHits = 0;
         if (box)
+        {
             noOfHits = Physics2D.OverlapBoxNonAlloc(//transform.position,
                                                     0,
                                                     radiusOrWidth,
-                                                    hits, 
+                                                    hits,
                                                     layerMask);
+        }
 
         else if (polygon)
         {
@@ -88,6 +110,7 @@ public class Shootable : MonoBehaviour
                     {
                         TakeDamage(1,b.playerIndex);
                         GameManager.instance.bulletManager.DeActiveBullet(b.index);
+                        FlashAndSpark(b.transform.position);
                     }
                 }
                 if(damagedByBombs)
@@ -95,6 +118,7 @@ public class Shootable : MonoBehaviour
                     Bomb bomb = hits[h].GetComponent<Bomb>();
                     if (bomb!=null)
                     {
+                        FlashAndSpark(bomb.power, bomb.playerIndex);
                         TakeDamage(bomb.power,bomb.playerIndex);
                     }
                 }
@@ -102,6 +126,16 @@ public class Shootable : MonoBehaviour
         }
 
     }
+    private void FlashAndSpark(Vector3 position)
+    {
+
+
+        if (flashing) return;
+        flashing = true;
+        flashTimer = 0.01f;
+        spriteRenderer.material.SetColor("_Overbright", Color.white);
+    }
+
     public void TakeDamage ( int ammount, byte fromPlayer)
     {
         if (destroyed) return;
@@ -135,7 +169,7 @@ public class Shootable : MonoBehaviour
             }
 
             Vector2 pos = transform.position;
-            {
+            
                 if(spawnCyclicPickUp)
                 {
                     PickUp spawn = GameManager.instance, GetNextDrop();
@@ -146,11 +180,15 @@ public class Shootable : MonoBehaviour
                 {
                     GameManager.instance.SpawnPickup(pickUp, pos);
                 }
-                if (remainDetroy)
+            if (smallExplosion)
+                EffectSystem.instance.SpawnSmallExplosion(transfom.positin);
+            if (largeExplosion)
+                EffectSystem.instance.SpawnLargeExplosion(transfom.positin);
+            if (remainDetroy)
                     destroyed = true;
-                else
-                    gameObjec.SetActive(false);
-            }
+            else
+                gameObjec.SetActive(false);
+            
 
             if (remainDetroy)
                 destroyed = true;

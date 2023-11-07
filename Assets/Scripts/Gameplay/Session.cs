@@ -15,6 +15,7 @@ public class Session
 
     public Hardnesss hardness = Hardnesss.Normal;
 
+    public CraftData[] craftDatas = new CraftDatas[2];
     public int stage = 1;
 
     public bool practise = false;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Craft : MonoBehaviour
 {
-   public  CraftData craftData = new CraftData();
+  
     Vector3 newPosition = new Vector3();
 
     public GameObject AftFlame1;
@@ -32,10 +32,16 @@ public class Craft : MonoBehaviour
     const int INVUNERABLELENGTH = 120;
     bool alive = true;
 
-    public static int MAXIMUMBEAMCHARGE = 64; 
+    public static int MAXIMUMBEAMCHARGE = 64;
+
+    const int MAXLIVES = 5;
+    const int MAXSMALLBOMBS = 8;
+    const int MAXLARGEBOMBS = 5;
 
     SpriteRenderer spriteRenderer = null;
     int layerMask = 0;
+    int pickUpLayer = 0;
+
     public BulletSpawner [] bulletSpawner = new BulletSpawner[5];
 
     public Option[] options = new Option[4];
@@ -48,6 +54,9 @@ public class Craft : MonoBehaviour
     public Beam beam = null;
 
     public GameObject bombPrefab = null;
+
+    public SoundFX explodingNoise = null;
+    public SoundFX bombSound = null;
 
     private void Start()
     {
@@ -84,6 +93,10 @@ public class Craft : MonoBehaviour
             {
                 GameManager.instance.playerDatas[playerIndex].chainTimer--;
                 if GameManager.instance.playerDatas[playerIndex].chain = 0;
+                {
+                    GameManager.instance.playerDatas[playerIndex].chain = 0;
+                    ScoreManager.instance.UpdateChainMultiplier(playerIndex);
+                }
             }
             //Invurnable flashing 
 
@@ -257,13 +270,50 @@ public class Craft : MonoBehaviour
 
     public void Hit ()
     {
-        if (!invunerable)
+        if (!invunerable && GameManager.instance.gameSession.invincible)
             Explode();
     }
     public void Explode()
     {
         alive = false;
+        GameManager.instance.playerDatas[playerIndex].lives--;
         StartCoroutine(Exploding());
+
+        if (explodingNoise)
+            explodingNoise.Play();
+
+        if (GameManager.instance.playerDatas[playerIndex].lives == 0)
+        {
+
+        }
+        else
+        {
+
+            // Eject powers and spwan next life
+            CraftData craftData = GameManager.instance.gameSession.craftDatas[playerIndex];
+            int noOfOptionsToRespawn = craftData.noOfEnabledOptions-1;
+            int noOfOptionsToRespawn = craftData.shotPower-1;
+            int noOfOptionsToRespawn = craftData.beamPower-1;
+
+            for (int o=0; o<noOfOptionsToRespawn; o++)
+            {
+                PickUp pickUp = GameManager.instance.SpawnPickup(GameManager.instance.options, transform.position);
+                pickup.transform.position += new Vector3 (UnityEngine.Random.Range(-128,128),UnityEngine.Random.Range(-128,128),0)
+            }
+
+            for (int o = 0; o<noOfPowerUpsToRespawn; o++)
+            {
+                PickUp pickUp = GameManager.instance.SpawnPickup(GameManager.instance.powerup, transform.position);
+                pickup.transform.position += new Vector3(UnityEngine.Random.Range(-128, 128), UnityEngine.Random.Range(-128, 128), 0)
+            }
+
+            for (int o = 0; o<noOfBeamUpsToRespawn; o++)
+            {
+                PickUp pickUp = GameManager.instance.SpawnPickup(GameManager.instance.beamup, transform.position);
+                pickup.transform.position += new Vector3(UnityEngine.Random.Range(-128, 128), UnityEngine.Random.Range(-128, 128), 0)
+            }
+        }
+
     }
 
     IEnumerator Exploding()
@@ -276,8 +326,49 @@ public class Craft : MonoBehaviour
             spriteRenderer.color = col;
             yield return new WaitForSeconds(0.1f);
         }
+
         EffectSystem.instance.CraftExplosion(transform.position);
+        GameManager.instance.playerCrafts[playerIndex] = null;
         Destroy(gameObject);
+
+        if (GameManager.instance.playerDatas[playerIndex].lives == 0)
+        {
+
+        }
+        else
+        {
+
+            // Eject powers and spwan next life
+            CraftData craftData = GameManager.instance.gameSession.craftDatas[playerIndex];
+            int noOfOptionsToRespawn = craftData.noOfEnabledOptions-1;
+            int noOfOptionsToRespawn = craftData.shotPower-1;
+            int noOfOptionsToRespawn = craftData.beamPower-1;
+            GameMAnager.instance.ResetState(playerIndex);
+
+            for (int o = 0; o<noOfOptionsToRespawn; o++)
+            {
+                PickUp pickUp = GameManager.instance.SpawnPickup(GameManager.instance.options, transform.position);
+                pickup.transform.position += new Vector3(UnityEngine.Random.Range(-128, 128), UnityEngine.Random.Range(-128, 128), 0)
+            }
+
+            for (int o = 0; o<noOfPowerUpsToRespawn; o++)
+            {
+                PickUp pickUp = GameManager.instance.SpawnPickup(GameManager.instance.powerup, transform.position);
+                pickup.transform.position += new Vector3(UnityEngine.Random.Range(-128, 128), UnityEngine.Random.Range(-128, 128), 0)
+            }
+
+            for (int o = 0; o<noOfBeamUpsToRespawn; o++)
+            {
+                PickUp pickUp = GameManager.instance.SpawnPickup(GameManager.instance.beamup, transform.position);
+                pickup.transform.position += new Vector3(UnityEngine.Random.Range(-128, 128), UnityEngine.Random.Range(-128, 128), 0)
+            }
+            GameManager.instance.DelayedRespawn(playerIndex);
+        }
+
+    }
+
+
+    yield return null;
     }
 
     public void AddOption()
@@ -317,13 +408,15 @@ public class Craft : MonoBehaviour
         }
     }
 
-    public void IncreaseBeamStrength()
+    public void IncreaseBeamStrength( int surplusValue)
     {
-        if(craftData.beamPower<5)
+        if (craftData.beamPower<5)
         {
             craftData.beamPower++;
             UpdateBeam();
         }
+        else
+            ScoreManager.instance.PickupCollected(playerIndex, surplusValue);
     }
 
     void UpdateBeam()
@@ -338,17 +431,22 @@ public class Craft : MonoBehaviour
             craftData.smallBombs--;
             Vector3 pos = transform.position;
             pos.y += 100;
+            if (bombSound)
+                bombSound.Play();
             Bomb bomb = Instantiate(bombPrefab, pos, Quaternion.identity).GetComponent<Bomb>();
             if (bomb)
                 bomb.playerIndex = (byte)playerIndex;
         }
     }
 
-    public void PowerUp(byte powerLevel)
+    public void PowerUp(byte powerLevel, int surplusValue)
     {
         craftData.shotPower += powerLevel;
         if (craftData.shotPower>8)
+        {
             craftData.shotPower = 8;
+            ScoreManager.instance.PickupCollected(playerIndex, surplusValue);
+        }
     }
 
     public void IncreaseScore(int value)
@@ -356,23 +454,41 @@ public class Craft : MonoBehaviour
         GameManager.instance.playerDatas[playerIndex].score += value;
         GameManager.instance.playerDatas[playerIndex].stagecore += value;
     }
-    public void OneUp()
+    public void OneUp(int surplusValue )
     {
         GameManager.instance.playerDatas[playerIndex].lives++;
+       if (GameManager.instance.playerDatas[playerIndex].lives>MAXLIVES)
+        {
+            ScoreManager.insance.MedalCollected(playerIndex, surplusValue);
+            GameManager.instance.playerDatas[playerIndex].lives =MAXLIVES;
+        }
     }
 
     public void AddMedal(int level, int value)
     {
-        IncreaseScore(value);
+        
+        ScoreManager.insance.MedalCollected(playerIndex, value);
     }
 
-    public void AddBomb(int power)
+    public void AddBomb(int power, int surplusValue)
     {
         if (power==1)
         {
             craftData.smalBombs++;
+            if (craftData.smallBombs>MAXSMALLBOMBS)
+            {
+                craftData.smallBombs = MAXSMALLBOMBS;
+                ScoreManager.insance.PickupCollected(playerIndex, surplusValue);
+            }
             else if (power==2)
+            {
                 craftData.largeBombs++;
+                if (craftData.largeBombs>MAXLARGEBOMBS)
+                {
+                    craftData.largeBombs = MAXLARGEBOMBS;
+                    ScoreManager.insance.PickupCollected(playerIndex, surplusValue);
+                }
+            }
             else
                 Debug.LogError("Invalid boomb power pick up");
         }

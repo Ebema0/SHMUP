@@ -24,7 +24,7 @@ public class LevelProgress : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(data.progress < levelSize)
         {

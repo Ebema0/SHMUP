@@ -22,19 +22,26 @@ public class Beam : MonoBehaviour
     // Update is called once per frame
     public void Fire()
     {
-
+        CraftData craftData = GameManager.istance.gameSession.craftDatas[craft.playerIndex];
         if (!craft.craftData.beamFiring)
+        {
             if (craft.craftData.beamCharge>MINIMUMCHARGER)
             {
-                {
-                    craft.craftData.beamFiring = true;
-                    craft.craftData.beamTimer = craft.craftData.beamCharge;
-                    craft.craftData.beamCharge = 0;
-                    UpdateBeam();
-                    gameObject.SetActive(true);
-                    beamFlash.SetActive(true);
-                }
+
+                craftData.beamFiring = true;
+                craftData.beamTimer = craftData.beamCharge;
+                craftData.beamCharge = 0;
+                UpdateBeam();
+                gameObject.SetActive(true);
+                beamFlash.SetActive(true);
+                if (audioSource)
+                    audioSource.Play();
             }
+            else
+            {
+                UpdateBeam();
+            }          
+        } 
     }
     
     void FixedUpdate()
@@ -51,6 +58,8 @@ public class Beam : MonoBehaviour
        if(craft.craftData.beamTimer>0)  craft.craftData.beamTimer--;
         if(craft.craftData.beamTimer==0) // Beam Finished
         {
+            if (audioSource)
+                audioSource.Stop();
             craft.craftData.beamFiring = false;
             gameObject.SetActive(false);
             beamFlash.SetActive(false);

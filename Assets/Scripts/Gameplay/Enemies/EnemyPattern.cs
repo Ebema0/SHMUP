@@ -31,6 +31,8 @@ public class EnemyPattern : MonoBehaviour
     [HideInInspector]
     public Quaternion lastAngle = Vector3.identity;
 
+    public WaveTrigger owningWave = null;
+
     [MenuItem("GameObject/SHMUP/EnemyPattern", false, 10)]
 
     static void CreateEnemyPatternObject(MenuCommand menuCommand)
@@ -49,11 +51,19 @@ public class EnemyPattern : MonoBehaviour
         }
         else Debug.LogError("Could not find Helper");
     }
+
+    private void Start ()
+    {
+        if(startActive)
+            Spawn();
+    }
+
     public void Spawn()
     {
         if (spawnedEnemy == null)
         {
             spawnedEnemy = Instatiate(enemyPrefab, transform, position, transform.rotation).GetComponent<Enemy>();
+            spawnedEnemy.SetWave(owningWave);
             spawnedEnemy.SetPattern(this);
             lastPosition = spawnedEnemy.transform.position;
             currentPosition = lastPosition;
@@ -86,6 +96,12 @@ public class EnemyPattern : MonoBehaviour
     public Vector2 CalculatePosition(float progressTimer)
     {
         currentStateIndex = WhichStep(progressTimer);
+        if(currentStepIndex<0)
+        {
+            if (spawnedEnemy)
+                return spawnedEnemy.transform.position;
+            return Vector2.zero;
+        }
         if (currentStateIndex>0) return spawnedEnemy.transform.position;
 
         lastPosition = currentPosition;
@@ -103,6 +119,9 @@ public class EnemyPattern : MonoBehaviour
     public Quaternion CalculateRotation(float progressTimer)
     {
         currentStateIndex = WhichStep(progressTimer);
+        if (currentStepIndex<0)
+            return Quaternion.identity;
+
         float startRotation = 0;
         if (CurrentStateIndex>0)
             startRotation = steps[CurrentStateIndex-1].EndRotation();

@@ -19,6 +19,8 @@ public class Shootable : MonoBehaviour
 
     private int  layerMask = 0;
 
+    private int hitScore = 10;
+    private int destroyScore = 10;
 
     private Vector halfExtent;
 
@@ -28,6 +30,8 @@ public class Shootable : MonoBehaviour
     public bool damagedByBullets = true;
     public bool damagedByBeams = true;
     public bool damagedByBombs = true;
+
+    public SoundFX destroyedSounds = null;
 
     private void Start()
     {
@@ -102,25 +106,31 @@ public class Shootable : MonoBehaviour
     {
         if (destroyed) return;
 
+        ScoreManager.instance.ShootableHit(fromPlayer, hitScore);
+       
         health -= ammount;
         EnemyPat part = GetComponent<EnemyPart>();
         if ( part)
         { 
-        if (health<=damagedHealth)
+            if (health<=damagedHealth)
                 part.Damaged(true);
             else
                 part.Damaged(false);
         }
-      
-        if (health<=0)
+        if (health<=0) // Destroyed
         {
             destroyed = true;
             if (part)
-                part.Destroyed();
+                part.Destroyed(fromPlayer);
+
+            if(destroyedSounds)
 
             if (fromPlayer<2)
             {
+                ScoreManager.instance.ShootableDestroyed(fromPlayer,destroyScore);
+
                 GameManager.instance.playerDatas[fromPlayer].chain++;
+                ScoreManager.instance.UpdateChainMultiplier(fromPlayer);
                 GameManager.instance.playerDatas[fromPlayer].chainTimer = PlayerData.MAXCHAINTIMER;
             }
 
@@ -129,19 +139,17 @@ public class Shootable : MonoBehaviour
                 if(spawnCyclicPickUp)
                 {
                     PickUp spawn = GameManager.instance, GetNextDrop();
-                    PickUp p = Instantiate(spawn, pos, Quaternion.identity);
-                    if (p)
-                        p.transform.SetParent(GameManager.instance.transform);
+                    GameManager.instance.SpawnPickup(spawn, pos);
+                     
                 }
                 foreach(PickUp pickUp in spawnSpecificPickup)
                 {
-                    pickUp p = Instantiate(pickUp, pos, Quaternion.identity);
-                    if(p)
-                    {
-                        p.transform.SetParent(Gamanager.instance.transform);
-                    }
-                    else Debug.LogError("Faled to spawn pickup")
+                    GameManager.instance.SpawnPickup(pickUp, pos);
                 }
+                if (remainDetroy)
+                    destroyed = true;
+                else
+                    gameObjec.SetActive(false);
             }
 
             if (remainDetroy)

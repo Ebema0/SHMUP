@@ -27,12 +27,16 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("AudioMenu",     LoadSceneMode.Additive);
         SceneManager.LoadScene("ControlsOptionsMenu",  LoadSceneMode.Additive);
         SceneManager.LoadScene("YesNoMenu",     LoadSceneMode.Additive);
+        SceneManager.LoadScene("ConrollerMenu", LoadSceneMode.Additive);
+
+        SceneManager.LoadScene("DebugHUDScene", LoadSceneMode.Additive);
+
 
     }
     public void SwitchToMainMenuMenus()
     {
-         SceneManager.LoadScene("MainMenuMenu",      LoadSceneMode.Additive);
-         SceneManager.LoadScene("ScoreMenu",        LoadSceneMode.Additive);
+         SceneManager.LoadScene("MainMenu",      LoadSceneMode.Additive);
+         SceneManager.LoadScene("ScoresMenu",        LoadSceneMode.Additive);
          SceneManager.LoadScene("MedalsMenu",        LoadSceneMode.Additive);
          SceneManager.LoadScene("CreditsMenu",       LoadSceneMode.Additive);
          SceneManager.LoadScene("PlayMenu",          LoadSceneMode.Additive);
@@ -45,6 +49,9 @@ public class MenuManager : MonoBehaviour
          SceneManager.LoadScene("AudioOptionsMenu",         LoadSceneMode.Additive);
          SceneManager.LoadScene("ControlsOptionsMenu",      LoadSceneMode.Additive);
          SceneManager.LoadScene("YesNoMenu",         LoadSceneMode.Additive);
+
+        SceneManager.LoadScene("DebugHUDScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("GameOverMenu", LoadSceneMode.Additive);
 
     }
 }

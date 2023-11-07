@@ -32,9 +32,13 @@ public class BulletSpawner : MonoBehaviour
 
     public bool homing = false;
 
+    public bool fireOffscreen = false;
+
     //public bool isPlayer = false;
 
-    public byte playerIndex = 2;
+    public byte playerIndex = 2; //>1 = enemy
+
+    public SoundFX shootSounds = null;
 
     public void Shoot (int size)
     {
@@ -83,6 +87,8 @@ public class BulletSpawner : MonoBehaviour
         }
         if (muzzleFlash)
             muzzleFlash.SetActive(true);
+        if (shootSounds)
+            shootSounds.Play();
     }
     public void FixedUpdate()
     {

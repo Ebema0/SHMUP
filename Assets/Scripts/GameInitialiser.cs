@@ -15,6 +15,8 @@ public class GameInitialiser : MonoBehaviour
 
     public GameObject gameManagerPrefab = null;
 
+    public AudioManager.Tracks playMusicTrack = AudioManager.Tracks.None;
+
     private bool menuLoaded = false;
 
     private Scene displayScene;
@@ -49,9 +51,16 @@ public class GameInitialiser : MonoBehaviour
                     MenuManager.instance.SwitchToMainMenuMenus();
                     break;
                 case GameMode.Gameplay:
-                   
+                    MenuManager.instance.SwitchToGameplayMenus();
                     break;
             };
+
+            if (playMusicTrack != AudioManager.Tracks.None)
+                AudioManager.instance.PlayMusicTrack(playMusicTrack, true, 1);
+
+            if (gameMode == GameMode.Gameplay)
+                gameManager.instance.SpawnPlayers();
+
             menuLoaded = true;
         }
 

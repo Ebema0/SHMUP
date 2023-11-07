@@ -22,11 +22,18 @@ public class Enemy : MonoBehaviour
     Animator animator = null;
     public string timeoutParameterName;
 
+    private WaveTrigger owningWave = null;
+
     private void Start ()
     {
         sections = gameObject.GetComponentsInChildren<EnemySection>();
         animator = gameObject.GetComponentsInChildren<Animator>();
         timer = timeout;
+    }
+
+    public void SetWave(WaveTrigger wave)
+    {
+        owningWave = wave;
     }
 
     public void SetPattern(EnemyPattern inPattern)
@@ -112,6 +119,10 @@ public class Enemy : MonoBehaviour
     }
     public void Destroyed()
     {
+        EnemyRule triggeredRule = rules[triggeredFromRulesIndex];
+        int playerIndex = triggeredRule.partsToCheck[0].destroyedByPlayer; // todo check that using the first index in safe. 
+        if (owningWave)
+            owningWave.EnemyDestroyed(transform.position, playerIndex);
         Destroyed(gameObject);
     }
 }

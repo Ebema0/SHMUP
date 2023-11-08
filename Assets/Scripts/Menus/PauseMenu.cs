@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static PauseMenu instance = null;
+
     void Start()
     {
-        
+        if (instance)
+        {
+            Debug.LogError("Trying to create more than one PauseMenu");
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnLoadButtton()
     {
-        
+        if(SaveManager.instance.LoadExists(1))
+        {
+            SaveManaager.instance.LoadGame(1);
+        }
     }
+
+    public void OnOptionsButton()
+    {
+       
+
+    public void OnLoadButtton()
+    {
+            SceneManager.LoadScene("MainMEnuScene");
+    }
+
 }

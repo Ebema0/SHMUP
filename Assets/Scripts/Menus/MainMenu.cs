@@ -58,4 +58,17 @@ public class MainMenu : Menu
         TurnOff(false);
         CraftSelectMenu.instance.TurnOn(this);
     }
+    public void OnQuitButton()
+    {
+        TurnOff(false);
+        YesNoMenu.instance.TurnOn(this);
+    }
+    public void OnLoadButton()
+    {
+        if (SaveManager.instance.LoadExists(1))
+        {
+            TurnOff(false);
+            CraftSelectMenu.instance.TurnOn(1);
+        }
+    }
 }

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PauseMenu : Menu
 {
+
+    public static PauseMenu instance = null;
+
     
-    void Start()
+ private void Start()
     {
         if (instance)
         {
@@ -23,12 +26,15 @@ public class PauseMenu : Menu
 
     public void OnLoadButton()
     {
-      
+      if(SaveManager.instance.LoasExist(1))
+        {
+            SaveManager.instance.LoadGame(1);
+        }
     }
 
     public void OnSaveButton()
     {
-
+        SaveManager.instance.SaveGame(1);
     }
 
     public void OnOptionsButton()

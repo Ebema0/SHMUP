@@ -65,8 +65,10 @@ public class GameInitialiser : MonoBehaviour
                 AudioManager.instance.PlayMusicTrack(playMusicTrack, true, 1);
 
             if (gameMode == GameMode.Gameplay)
+            {
+                SaveManager.instance.SaveGame(0); // 0= autosave at beginnig of states
                 GameManager.instance.SpawnPlayers();
-
+            }
             menuLoaded = true;
         }
 

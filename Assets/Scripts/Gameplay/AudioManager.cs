@@ -122,6 +122,7 @@ public class AudioManager : MonoBehaviour
             musicSource1.clip = musicTracks[(int)track];
             musicSource1.Play();
             activeMusicSource = 1;
+            StartCoroutine(DelayedPlayMusic(1));
 
             if (fade)
             {
@@ -140,6 +141,7 @@ public class AudioManager : MonoBehaviour
             }
             musicSource2.clip = musicTracks[(int)track];
             musicSource2.Play();
+            StartCoroutine(DelayedPlayMusic(1));
             musicSource2.Stop();
             if (fade)
             {
@@ -150,12 +152,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    IEnuMerator DelayedPlayMusic(int sourceNo)
+    {
+        yield return null;
+        if (sourceNo==1)
+            musicSource1.Play();
+        else if (sourceNo==2)
+            musicSource2.Play();
+    }
+
     IEnumeratot Fade (int sourceIndex,float duration, float startVolume, float targetVolume)
     {
         float timer  = 0;
         while (timet<duration)
         {
-            timer += timer.deltaTime;
+            timer += Tome.unscaleDeltaTime;
             float newVol = Mathf.Lerp(startVolume, targetVolume, timer / duration);
             newVol = Mathf.Clamp(newVool, 0.0001f, 0.9999f);
 

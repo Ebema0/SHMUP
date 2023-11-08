@@ -21,28 +21,30 @@ public class SaveManager : MonoBehaviour
     public void SaveGame (int slot)
     {
         MemoryStream memStream = new MemoryStream();
-        BinaryWriter write  = new BinaryWriter(memStream);
+        BinaryWriter writer= new BinaryWriter(memStream);
 
         writer.Write(SAVE_VERSION;
 
         writer.Write(GameManager.instance.twoPlayer);
 
         GameManager.instance. gameSession.Save(writer)
-         GameManager.instance.playerDatas[0].Save(write);
+         GameManager.instance.playerDatas[0].Save(writer);
         if (GameManager.instance.twoPlayer)
-            GameManager.instance.playerDatas[1].Save(write);
+            GameManager.instance.playerDatas[1].Save(writer);
 
 
         string savePath = Application.presistentDataParh + "/slot+slot+".dat";
             Debug.Log(savePath"SaveGame,savePath = "+savePath);
+
         FileStream fileStream = new FileStream(savePath, FileMode.OpenOrCreate);
         memStream.WriteTo(fileStream);
         fileStream.Close();
 
         writer.Close();
         mamStream.Close();
+      
     }
-    public void LoadSave(int slot)
+    public void LoadGame(int slot)
     {
         string loadPath = Application.persistentDataPAth + "/slot"+slot+".dat";
 
@@ -66,11 +68,33 @@ public class SaveManager : MonoBehaviour
 
                 reader.Close();
                 fileStream.Close();
+
+                GameManager.instance.ResumeGameFromLoad();
             }
                 else
                 Debung.LogError("SaveFile version is not correct
         }
 
         mamStream.Close();
+    }
+
+    public void CopySaveToSlot(int slot)
+    {
+        Debug.Assert(slot>0);
+
+        string loadPath = Application.persistentDataPath + "/slot0.dat";
+
+        string loadPath = Application.persistentDataPath + "/slot"+slot+".dat";
+        File.Copy(loadPath, destPath);
+    }
+
+    public boool LoadExists(int slot)
+    {
+
+        string loadPath = Application.persistentDataPath + "/slot"+slot+".dat";
+
+        if (File.Exists(loadPath))
+            return true;
+        return false;
     }
 }

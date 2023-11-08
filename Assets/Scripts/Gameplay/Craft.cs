@@ -513,4 +513,33 @@ public class CraftData
 
     public byte smallBombs;
     public byte largeBombs;
+
+    public void Save(BinaryWriter writer)
+    {
+        writer.Writer(shotPower);
+
+        writer.Write(noOfEnabledOptions);
+        writer.Write(optionsLayout);
+
+        writer.Write(beamPower);
+        writer.Write(beamCharge);
+
+        writer.Write(smallBombs);
+        writer.Write(largeBombs);
+    }
+
+     public void Load(BinaryReader reader)
+    {
+        shotPower = reader.ReadByte();
+
+        noOfEnabledOptions = reader.ReadByte();
+        optionsLayout = reader.ReadByte();
+
+        beamPower = reader.ReadByte();
+        beamCharge = reader.ReadByte();
+
+        smallBombs= reader.ReadByte();
+        largeBombs = reader.ReadByte();
+    }
+
 }

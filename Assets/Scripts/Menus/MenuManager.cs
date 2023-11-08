@@ -35,23 +35,36 @@ public class MenuManager : MonoBehaviour
     }
     public void SwitchToMainMenuMenus()
     {
-         SceneManager.LoadScene("MainMenu",      LoadSceneMode.Additive);
-         SceneManager.LoadScene("ScoresMenu",        LoadSceneMode.Additive);
-         SceneManager.LoadScene("MedalsMenu",        LoadSceneMode.Additive);
-         SceneManager.LoadScene("CreditsMenu",       LoadSceneMode.Additive);
-         SceneManager.LoadScene("PlayMenu",          LoadSceneMode.Additive);
-         SceneManager.LoadScene("PracticeMenu",      LoadSceneMode.Additive);
-         SceneManager.LoadScene("PracticeArenaMenu", LoadSceneMode.Additive);
-         SceneManager.LoadScene("PracticeStageMenu", LoadSceneMode.Additive);
-         SceneManager.LoadScene("CraftSelectMenu",   LoadSceneMode.Additive);
-         SceneManager.LoadScene("GraphicsOptionsMenu",LoadSceneMode.Additive);
-         SceneManager.LoadScene("OptionsMenu",       LoadSceneMode.Additive);
-         SceneManager.LoadScene("AudioOptionsMenu",         LoadSceneMode.Additive);
-         SceneManager.LoadScene("ControlsOptionsMenu",      LoadSceneMode.Additive);
-         SceneManager.LoadScene("YesNoMenu",         LoadSceneMode.Additive);
-
-        SceneManager.LoadScene("DebugHUDScene", LoadSceneMode.Additive);
-        SceneManager.LoadScene("GameOverMenu", LoadSceneMode.Additive);
-
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("ScoresMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("MedalsMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("CreditsMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("PlayMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("PracticeMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("PracticeArenaMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("PracticeStageMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("CraftSelectMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("GraphicsOptionsMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("OptionsMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("AudioOptionsMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("ControlsOptionsMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("YesNoMenu", LoadSceneMode.Additive);
+        if (!titleMenuShown)
+        {
+            titleMenuShown = true;
+            SceneManager.LoadScene("GameOverMenu", LoadSceneMode.Additive);
+        }
+        else
+        {
+            StartCourentine(ShownMainMenu();
+        }
+    }
+    IEnumerator ShownMainMenu()
+    {
+        while(MainMenu.instance == null)
+        {
+            yield return null;
+        }
+        MainMenu.instance.TurnOn(null);
     }
 }

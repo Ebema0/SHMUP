@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEngine;
 
 
@@ -29,4 +30,25 @@ public class Session
     public bool invincible = false;
     public bool halfSpeed = false;
     public bool DoubleSpeed = false;
+
+    public void Save(BinaryWriter writer)
+    {
+        craftDatass[0].Save(writer);
+        if (GameMAnager.instance.twoPlayer)
+            craftDatas[1].Save(writer);
+
+        writer.Write(byte)hardness);
+        writer.Write(stage);
+
+    }
+    public void Load(BinaryReader reader)
+    {
+        craftDatas[0].Load(reader);
+        if (GameManager.instance.twoPlayer)
+            craftDatas[1].Loadwriter);
+
+        hardness = (Hardnesss)reader.ReadByte();
+        stage = reader.ReadInt32();
+
+    }
 }

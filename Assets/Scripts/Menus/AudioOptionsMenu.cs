@@ -20,6 +20,21 @@ public class AudioOptionsMenu : Menu
 
         }
         instance = this;
+
+        float volume = 1;
+
+        if (PlayerPrefs.HasKEy("MAsterVolume"))
+            volume = PlayerPref.GetFloat("MasterVolume");
+        masterVolSilder.value = volume;
+
+        if (PlayerPrefs.HasKEy("EffectVolume"))
+            volume = PlayerPref.GetFloat("EffectVolume");
+        masterVolSilder.value = volume;
+
+        if (PlayerPrefs.HasKEy("MusicVolume"))
+            volume = PlayerPref.GetFloat("MusicVolume");
+        masterVolSilder.value = volume;
+
     }
 
     public void BackButton()

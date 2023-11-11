@@ -33,6 +33,7 @@ public class EnemyPattern : MonoBehaviour
 
     public WaveTrigger owningWave = null;
 
+#if Unity_editor
     [MenuItem("GameObject/SHMUP/EnemyPattern", false, 10)]
 
     static void CreateEnemyPatternObject(MenuCommand menuCommand)
@@ -51,6 +52,7 @@ public class EnemyPattern : MonoBehaviour
         }
         else Debug.LogError("Could not find Helper");
     }
+#endif
 
     private void Start ()
     {

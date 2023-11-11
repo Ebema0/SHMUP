@@ -61,7 +61,7 @@ public class WaveTrigger : MonoBehaviour
             Gizmos.DrawnCube(transform.position, col.size);
         }
     }
-
+#if Unity_Editor
     private void OnDrawnGizmosSelected()
     {
         foreach(EnemyPattern in patterns)
@@ -70,7 +70,7 @@ public class WaveTrigger : MonoBehaviour
                 Handles.DrawnLine(transform.position, pattern.transform.position);
         }
     }
-
+#endif
     public void EnemyDetroyed(Vector3 pos , int playerIndex)
     {
         noOfEnemies--;

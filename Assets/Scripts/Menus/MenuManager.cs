@@ -30,11 +30,17 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("ConrollerMenu", LoadSceneMode.Additive);
 
         SceneManager.LoadScene("DebugHUDScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("GameOverMenu", LoadSceneMode.Additive);
 
+        SceneManager.LoadScene("KeyPadMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("WellDoneMenu", LoadSceneMode.Additive);
+        
 
     }
     public void SwitchToMainMenuMenus()
     {
+        Debug.Log("Switch to Main Menus");
+
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         SceneManager.LoadScene("ScoresMenu", LoadSceneMode.Additive);
         SceneManager.LoadScene("MedalsMenu", LoadSceneMode.Additive);

@@ -74,6 +74,11 @@ public class Enemy : MonoBehaviour
     public void TimeOutDestruct()
     {
         Destroy(gameObject);
+
+        if (isBoss)
+        {
+            GameManager.instance.NextStage();
+        }
     }
 
     void OutOffBounds()
@@ -117,13 +122,18 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-    public void Destroyed()
+    public void Destroyed(int triggeredFromRuleIndex)
     {
         EnemyRule triggeredRule = rules[triggeredFromRulesIndex];
         int playerIndex = triggeredRule.partsToCheck[0].destroyedByPlayer; // todo check that using the first index in safe. 
         if (owningWave)
             owningWave.EnemyDestroyed(transform.position, playerIndex);
         Destroyed(gameObject);
+
+        if (isBoss)
+        {
+            GameManager.instance.NextStage();
+        }
     }
 }
 

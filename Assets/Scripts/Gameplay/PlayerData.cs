@@ -35,4 +35,13 @@ public class PlayerData
         
     }
 
+    public void ResetData()
+    {
+        score =0;
+        stageScore = 0;
+        lives = 3;
+        chain =0;
+        chainTimer = 0;
+    }
+
 }

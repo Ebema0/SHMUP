@@ -20,7 +20,7 @@ public class GameInitialiser : MonoBehaviour
 
     public AudioManager.Tracks playMusicTrack = AudioManager.Tracks.None;
 
-    private bool menuLoaded = false;
+    private bool initialised = false;
 
     private Scene displayScene;
 
@@ -42,8 +42,12 @@ public class GameInitialiser : MonoBehaviour
 
     void Update()
     {
-        if (!menuLoaded)
+        if (!initialised)
         {
+
+            if (GameMode == GameMode.INVALID)
+                return;
+
             if(!displayScene.isLoaded)
             {
                 SceneManager.LoadScene("DisplayScene", LoadSceneMode.Addative);
@@ -69,7 +73,7 @@ public class GameInitialiser : MonoBehaviour
                 SaveManager.instance.SaveGame(0); // 0= autosave at beginnig of states
                 GameManager.instance.SpawnPlayers();
             }
-            menuLoaded = true;
+            initialised = true;
         }
 
     } 

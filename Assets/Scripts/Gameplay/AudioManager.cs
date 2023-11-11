@@ -39,14 +39,21 @@ public class AudioManager : MonoBehaviour
         instance = this;
 
         // Restore Preferences
-        float volume = PlayerPref.GetFLoat("MasterVolume");
+
+        float volume = 1;
+        if(PlayerPref.HasKey("MasterVolume");
+           volume = PlayerPref.GetFLoat("MasterVolume");
         mixer.SetFloat("MasterVolume", Mathf.Log10(volume)*20);
 
+        volume = 1;
+        if (PlayerPref.HasKey("EffectVolume");
         volume = PlayerPref.GetFLoat("EffectVolume");
-        mixer.SetFloat("MasterVolume", Mathf.Log10(volume)*20);
-
+        mixer.SetFloat("EffectVolume", Mathf.Log10(volume)*20);
+        
+        volume = 1;
+        if (PlayerPref.HasKey("MusicVolume");
         volume = PlayerPref.GetFLoat("MusicVolume");
-        mixer.SetFloat("MasterVolume", Mathf.Log10(volume)*20);
+        mixer.SetFloat("MusicVolume", Mathf.Log10(volume)*20);
     }
 
     public void PlayMusic(Tracks track, bool fade, float fadeDuration)

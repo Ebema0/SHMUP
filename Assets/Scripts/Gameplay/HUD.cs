@@ -6,11 +6,26 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
+    public stattic HUD instance = null;
     public AnimatedNumber[] playerScore = AnimatedNumber[2];
     public AnimatedNumber topScore;
     public GameObject player2Start;
+    public GameObject player2HUD;
+    public Image fadeScreenImage;
 
     public PlayerHUD[] playerHUDs = new PlayerHUD[2];
+
+    private void Start()
+    {
+        if (instance)
+        {
+            Debug.LogError("Trying to creat emore than one HUD");
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        TurnOnP2(GameManager.instance.twoPlayer);
+    }
 
     private void FixedUpdate()
     {
@@ -267,7 +282,35 @@ public class HUD : MonoBehaviour
                                        (float)PlayerData.MAXCHAINTIMER;
     }
 
+    public void TurnOnP2(bool turnOn)
+    {
+        if (turnOn)
+        {
+            player2Start.gameObject.SetActive(false);
+            playerScore[1].gameObject.SetActive(true);
+            player2HUD.SetActive(true);
+        }
+        else
+        {
+            player2Start.gameObject.SetActive(true);
+            playerScore[1].gameObject.SetActive(false);
+            player2HUD.SetActive(false);
+        }
+    }
 
+    public void FadeOutScreen()
+    {
+        fadeScreenImage.gameObject.SetActive(true);
+        fadeScreenImage.color = Color.black;
+    }
+
+     public void FadeInScreen()
+    {
+        fadeScreenImage.gameObject.SetActive(false);
+        fadeScreenImage.color = new Color(0, 0, 0, 0);
+    }
+
+     
     //-
 
     [Serializable]

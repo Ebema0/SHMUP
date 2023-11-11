@@ -13,12 +13,16 @@ public class LevelProgress : MonoBehaviour
     public AnimationCurve speedCurve = new AnimationCurve();
 
     private Craft player1Craft;
+    private Craft player2Craft;
+
+    public bool disableMovement = false;
 
     // Start is called before the first frame update
     void Start()
     {
         data.positionX = transform.position.x;
         data.positionX = transform.position.y;
+         
         if (GameManager.instance)
             GameManager.instance.progressWindow = this; 
     }
@@ -26,16 +30,25 @@ public class LevelProgress : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!GameManager.instance) return;
+
         if(data.progress < levelSize)
         {
-            float ratio = (float)data.progress/ (float)levelSize;
-            float movement = speedCurve.Evaluate(ratio);
-            data.progress++;
-            UpdateProgressWindow(movement);
             if (player1Craft==null)
-                player1Craft = GameManager.instance.playerOneCraft;
-            if (player1Craft)
-                UpdateProgressWindow(player1Craft.craftData.positionX, movement);
+                player1Craft = GameManager.instance.playerOneCraft[0];
+            if (player2Craft==null)
+                player2Craft = GameManager.instance.playerOneCraft[2];
+            if (!disableMovement)
+            {
+                if (player1Craft||player2Craft)
+                {  
+                   float ratio = (float)data.progress/ (float)levelSize;
+                    float movement = speedCurve.Evaluate(ratio);
+                    data.progress++;
+                    CraftData craftData = GameManager.instance.gameSession.craftDatas[0];
+                    UpdateProgressWindow(craftData.position, movement);
+                }
+            }
         }
     }
     void UpdateProgressWindow(float shipX, float movement)

@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
+
 
 public class SplashScreen : MonoBehaviour
 {
-    private float timer = 0;
+    private VideoPlayer player = null;
 
   
-    void Update()
+    void Start
     {
-        timer+=Time.deltaTime;
-
-        if (timer>5)
-            VideoFinished();
+        player.loopPoinReached += EndReached;
     }
 
-    void VideoFinished()
+    void VideoFinished(VideoPlayer vp)
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
     }
